@@ -1,4 +1,3 @@
-import PropsType from "prop-types"
 import { useRef } from "react"
 import "swiper/css"
 import "swiper/css/navigation"
@@ -80,7 +79,7 @@ const CategorySlide = (props) => {
             >
                 {Array.isArray(items) ? (
                     items.map((item) => (
-                        <SwiperSlide key={item.id}>
+                        <SwiperSlide key={item._id}>
                             <CategoryModule {...item} />
                         </SwiperSlide>
                     ))

@@ -24,6 +24,7 @@ import DeleteIcon from "./DeleteIcon"
 import Return from "./Return"
 import Delivery from "./Delivery"
 import PaymentIcon from "./PaymentIcon"
+import Discount from "./Discount"
 
 export {
     CameraIcon,
@@ -51,5 +52,6 @@ export {
     WishlistIcon,
     Return,
     Delivery,
-    PaymentIcon
+    PaymentIcon,
+    Discount
 }

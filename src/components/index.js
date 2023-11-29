@@ -15,6 +15,7 @@ import Search from "./search"
 import PageButton from "./pageButton"
 import Loader from "./loader"
 import Product from "./product"
+import Technical from "./technical"
 
 export {
     Advertisement,
@@ -33,5 +34,6 @@ export {
     Search,
     PageButton,
     Loader,
-    Product
+    Product,
+    Technical
 }

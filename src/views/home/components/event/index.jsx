@@ -1,8 +1,10 @@
 import React from "react"
 import EventTimer from "./EventTimer"
 import Button from "~/components/button"
+import { useNavigate } from "react-router-dom"
 
 const Event = () => {
+    const navigate = useNavigate()
     return (
         <div className="flex justify-between items-center bg-black relative">
             <div className="description flex flex-col items-start ps-[56px] py-[69px]">
@@ -15,9 +17,9 @@ const Event = () => {
                         <br />
                         Music Experience
                     </p>
-                    <EventTimer year={2023} month={11} day={10} />
+                    <EventTimer year={2023} month={12} day={10} />
                 </div>
-                <Button third large>
+                <Button onClick={() => navigate('/product/301')} third large>
                     Buy Now!
                 </Button>
             </div>

@@ -3,7 +3,7 @@ import ArrowIcon from "../icon/ArrowIcon"
 import { Link } from "react-router-dom"
 
 const AdvertisementSlide = (props) => {
-    const { _id, logo, image, title, event } = props
+    const { logo, image, title, event } = props
     return (
         <div className="bg-black h-full flex advertisement justify-between">
             <div className="advertisement__content ms-16 mt-[58px] me-[47px]">
@@ -17,7 +17,7 @@ const AdvertisementSlide = (props) => {
                     </h1>
                 </div>
                 <div className="flex">
-                    <Link to={`${_id}`}>
+                    <Link to='/product'>
                         <div className="flex gap-2 items-center">
                             <div className="text-[#FAFAFA] text-base font-medium text-center flex flex-col">
                                 <span>Shop Now</span>

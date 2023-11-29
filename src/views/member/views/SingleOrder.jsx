@@ -10,12 +10,13 @@ import { AiOutlineDash } from "react-icons/ai"
 import PaymentBox from "../components/PaymentBox"
 import MemberInfo from "../components/MemberInfo"
 import SupportInfo from "../components/SupportInfo"
+import { statusRecord } from "~/config/StatusRecord"
 import { useGetOrderByIdQuery } from "~/features/order/orderApiSlice"
 import OrderedProductDetail from "../components/OrderedProductDetail"
+import getUserInfoFromLocalStorage from "~/config/GetUserInfo"
 
-// This is a order page which can contain multiple ordered items
 const SingleOrder = () => {
-    // get order by id => display order status
+    const navigate = useNavigate()
     let { id: orderId } = useParams()
     const {
         data: orders,
@@ -29,15 +30,19 @@ const SingleOrder = () => {
     let orderedProducts
     let productContent
     let orderStatus
+    let orderPaymentForm
     let totalCost
+    let colorRecord
     if (isLoading) {
         productContent = <p>Loading...</p>
     } else if (isSuccess) {
         orderedProducts = orders?.metadata?.order
         orderStatus = orderedProducts?.orderStatus?.name
+        colorRecord = statusRecord[orderStatus]
+        orderPaymentForm = orderedProducts?.paymentForm?.name
         productContent = Array.isArray(orderedProducts.products) ? (
-            orderedProducts.products.map((item) => (
-                <OrderedProductDetail {...item} />
+            orderedProducts.products.map((item, index) => (
+                <OrderedProductDetail key={index} {...item} />
             ))
         ) : (
             <></>
@@ -48,22 +53,17 @@ const SingleOrder = () => {
             0
         )
 
+        const user = getUserInfoFromLocalStorage()
+
         userInfo = {
-            name: `${orderedProducts?.user?.lastName} ${orderedProducts?.user?.firstName}`,
+            name: `${user?.firstName} ${user?.lastName}`,
             phone: `${orderedProducts?.phoneNumber}`,
             address: `${orderedProducts?.shipAddress}`,
         }
-        // more logic in here
-        // orderStatus
-        // totalCost
-        // Discount = 500
-        // required payemnry = price
-        // paid => incomplete
     } else if (isError) {
         productContent = <p>{error}</p>
     }
 
-    const navigate = useNavigate()
     return (
         <section className="my-4 flex">
             <div className="min-w-[260px]">
@@ -100,27 +100,28 @@ const SingleOrder = () => {
 
                 <div className="status-cotainer flex justify-center gap-4">
                     <div className="flex flex-col items-center justify-center">
-                        <BsFillBoxSeamFill size={35} color="red" />
-                        <h5 className="flex text-center text-xs mt-2 text-[#ff0000]">
+                        <BsFillBoxSeamFill
+                            size={35}
+                            color={`${colorRecord?.colorIcon_1}`}
+                        />
+                        <h5
+                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_1}`}
+                        >
                             Đặt hàng <br />
                             thành công
                         </h5>
                     </div>
                     <AiOutlineDash
                         size={35}
-                        color={orderStatus === "Pending" ? "black" : "red"}
+                        color={`${colorRecord?.colorIcon_1}`}
                     />
                     <div className="flex flex-col items-center justify-center">
                         <GiConfirmed
                             size={35}
-                            color={orderStatus === "Pending" ? "black" : "red"}
+                            color={`${colorRecord?.colorIcon_2}`}
                         />
                         <h5
-                            className={`flex text-center text-xs mt-2 ${
-                                orderStatus === "Pending"
-                                    ? "text-black"
-                                    : "text-[#ff0000]"
-                            }`}
+                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_2}`}
                         >
                             Đã <br />
                             xác nhận
@@ -128,19 +129,15 @@ const SingleOrder = () => {
                     </div>
                     <AiOutlineDash
                         size={35}
-                        color={orderStatus === "Pending" ? "black" : "red"}
+                        color={`${colorRecord?.colorIcon_2}`}
                     />
                     <div className="flex flex-col items-center justify-center">
                         <TbTruckDelivery
                             size={35}
-                            color={orderStatus === "Pending" ? "black" : "red"}
+                            color={`${colorRecord?.colorIcon_3}`}
                         />
                         <h5
-                            className={`flex text-center text-xs mt-2 ${
-                                orderStatus === "Pending"
-                                    ? "text-black"
-                                    : "text-[#ff0000]"
-                            }`}
+                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_3}`}
                         >
                             Đang <br />
                             vận chuyển
@@ -148,26 +145,26 @@ const SingleOrder = () => {
                     </div>
                     <AiOutlineDash
                         size={35}
-                        color={orderStatus === "Pending" ? "black" : "red"}
+                        color={`${colorRecord?.colorIcon_3}`}
                     />
                     <div className="flex flex-col items-center justify-center">
                         <FaBoxOpen
                             size={35}
-                            color={orderStatus === "Pending" ? "black" : "red"}
+                            color={`${colorRecord?.colorIcon_4}`}
                         />
                         <h5
-                            className={`flex text-center text-xs mt-2 ${
-                                orderStatus === "Pending"
-                                    ? "text-black"
-                                    : "text-[#ff0000]"
-                            }`}
+                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_4}`}
                         >
                             Đã <br />
                             giao hàng
                         </h5>
                     </div>
                 </div>
-                <PaymentBox total={totalCost} orderStatus={orderStatus} />
+                <PaymentBox
+                    total={totalCost}
+                    orderStatus={orderStatus}
+                    orderPaymentForm={orderPaymentForm}
+                />
                 <MemberInfo {...userInfo} />
                 <SupportInfo />
             </div>

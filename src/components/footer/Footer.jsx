@@ -14,7 +14,7 @@ const Footer = () => {
                                 href="/#"
                                 className="text-base mb-6 font-bold font-['Inter'] leading-6 tracking-wider text-color-white"
                             >
-                                Exclusive
+                                SE Shop
                             </a>
                             <a href="/#" className="text-sm mb-6 font-light text-color-white">
                                 Subscribe
@@ -119,7 +119,7 @@ const Footer = () => {
                 <div className="flex justify-center items-center pt-4 pb-6 opacity-30">
                     <CopyrightIcon />
                     <span className="text-xs font-light text-color-white">
-                        &nbsp; Copyright Rimel 2022. All right reserved
+                        &nbsp; Copyright SE-Lengend 2023. All right reserved
                     </span>
                 </div>
             </div>

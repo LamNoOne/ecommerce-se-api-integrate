@@ -1,15 +1,11 @@
+import style from "~/style"
 import {
     Advertisement,
-    Button,
     CardProduct,
     Category,
     CategoryButton,
-    Line,
 } from "~/components"
 
-import { advertisement, category, categoryBrowse } from "~/components/variables"
-
-import style from "~/style"
 import {
     CategoryList,
     CategorySlide,
@@ -18,17 +14,20 @@ import {
     Feature,
     Timer,
 } from "./components"
-import { products } from "./components/variables/data"
-import { AiOutlineConsoleSql } from "react-icons/ai"
+
+import {
+    advertisement,
+    category,
+    categoryBrowse 
+} from "~/components/variables"
 
 const Home = () => {
-
     return (
         <div className="flex flex-col gap-16">
             <section>
                 <div className="top-home flex pt-10">
                     <div className="flex-1 category-menu">
-                        <Category category={category} />
+                        <Category />
                     </div>
                     <div className={`ms-[56px] ${style.advertisememtStyle}`}>
                         <Advertisement advertisement={advertisement} />

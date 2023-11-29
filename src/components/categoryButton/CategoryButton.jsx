@@ -1,5 +1,4 @@
 import React from "react"
-import PropsType from "prop-types"
 
 const CategoryButton = (props) => {
     const { title, image, active } = props
@@ -15,11 +14,6 @@ const CategoryButton = (props) => {
             </div>
         </div>
     )
-}
-
-CategoryButton.propsType = {
-    title: PropsType.string.isRequired,
-    image: PropsType.string.isRequired,
 }
 
 export default CategoryButton

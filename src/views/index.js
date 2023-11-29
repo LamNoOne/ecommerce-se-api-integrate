@@ -12,7 +12,7 @@ import Camera from "./camera"
 import Accessories from "./accessories"
 import PC from "./pc"
 import Tivi from "./tivi"
-import Promotion from "./promotion"
+import Products from "./product"
 import {
     HomeMember,
     Order,
@@ -40,7 +40,7 @@ export {
     Accessories,
     PC,
     Tivi,
-    Promotion,
+    Products,
     HomeMember,
     Order,
     SingleOrder,

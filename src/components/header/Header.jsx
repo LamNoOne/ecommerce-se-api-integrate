@@ -1,27 +1,39 @@
 import { Link } from "react-router-dom"
 import { Line, Search } from "~/components"
-import { CartIcon, SearchIcon, WishlistIcon } from "~/components/icon"
+import { CartIcon, WishlistIcon } from "~/components/icon"
 import style from "~/style"
 import UserIcon from "../icon/UserIcon"
 import AccountDropdown from "../accountDropdown"
-import { useGetUserQuery } from "~/features/auth/authApiSlice"
+import { useGetUserQuery } from "~/features/user/userApiSlice"
 import { useGetCartByUserIdQuery } from "~/features/cart/cartApiSlice"
 import { setCredentials } from "~/features/auth/authSlice"
+import { useDispatch } from "react-redux"
 
 const Header = (props) => {
-    const {
-        data: user,
-    } = useGetUserQuery()
+    const dispatch = useDispatch()
+    const { data: user, isSuccess: isUser } = useGetUserQuery()
 
-    const {
-        data: cart,  
-        isSuccess
-    } = useGetCartByUserIdQuery()
+    const { data: cart, isSuccess: isCart } = useGetCartByUserIdQuery()
 
     let cartNumber = 0
-    if(isSuccess) {
+    let content
+    if (!user) {
+        content = (
+            <Link to="/login" className="ms-6 flex items-center">
+                <UserIcon />
+            </Link>
+        )
+    } else if (isUser) {
+        dispatch(setCredentials({ ...user }))
+        content = (
+            <div className="ms-6 mt-1">
+                <AccountDropdown img={user?.metadata?.user?.imageUrl} />
+            </div>
+        )
+    }
+    if (isCart) {
         cartNumber = cart?.metadata?.cart?.products?.length
-    } 
+    }
 
     const { title } = props
     return (
@@ -96,20 +108,17 @@ const Header = (props) => {
                     </Link>
                     {/* Get order state, after that, check if state is Array, get Array.length,
                     create a div width:16px height: 16px rounded-full, pass a length to it*/}
-                    <Link to="/user/cart" className="ms-6 flex items-center relative">
-                        <span className="absolute -top-3 -right-3 w-[24px] h-[24px] border rounded-full text-xs flex items-center justify-center text-white bg-[#DB4444]">{cartNumber}</span>
+                    <Link
+                        to="/user/cart"
+                        className="ms-6 flex items-center relative"
+                    >
+                        <span className="absolute -top-3 -right-3 w-[24px] h-[24px] border rounded-full text-xs flex items-center justify-center text-white bg-[#DB4444]">
+                            {cartNumber}
+                        </span>
                         <CartIcon />
                     </Link>
                     {/* Check if user login or not, then, switch icon as well as its function */}
-                    {user ? (
-                        <div className="ms-6 mt-1">
-                            <AccountDropdown img={user?.metadata?.user?.imageUrl} />
-                        </div>
-                    ) : (
-                        <Link to="/login" className="ms-6 flex items-center">
-                            <UserIcon />
-                        </Link>
-                    )}
+                    {content}
                 </div>
             </div>
             <Line style={style.lineStyleMain} />

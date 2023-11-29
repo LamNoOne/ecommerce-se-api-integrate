@@ -4,18 +4,10 @@ import images from "~/assets/images"
 import { useState } from "react"
 import CalendarDropDown from "../components/CalendarDropDown"
 import OrderedProduct from "../components/OrderedProduct"
-
-// Try import data
-import { data } from "../data/data"
 import { useGetAllOrderQuery } from "~/features/order/orderApiSlice"
-import { original } from "@reduxjs/toolkit"
-import CustomOrder from "~/config/CustomOrder"
-import { RiContactsBookLine } from "react-icons/ri"
+
 
 const Order = () => {
-    // call api getAllProductByUserId => display all orders
-    // useSelector to get the state => display ordered items
-
     const {
         data: orders,
         isLoading,
@@ -34,16 +26,16 @@ const Order = () => {
     }
 
     const handleOnClickFilter = (key, title) => {
-        // set active,
-        // dispatch action to get new state
         setActive(title)
     }
 
     let content
+    let numberOrder
     if (isLoading) {
         content = <p>Loading...</p>
     } else if (isSuccess) {
         const items = orders?.metadata?.orders
+        numberOrder = items?.length
         content = (
             <>
                 {items.map((item) => (
@@ -81,7 +73,7 @@ const Order = () => {
                 </div>
                 <div className="relative flex items-center justify-evenly h-[100px] bg-[#f4f6f8]">
                     <div className="order-number flex flex-col items-center">
-                        <h1 className="text-2xl font-semibold">4</h1>
+                        <h1 className="text-2xl font-semibold">{numberOrder}</h1>
                         <p className="text-xs">orders</p>
                     </div>
                     <div className="absolute left-[50%] w-[1px] bg-black py-10"></div>

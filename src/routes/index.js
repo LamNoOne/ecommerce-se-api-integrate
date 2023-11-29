@@ -15,7 +15,7 @@ import {
     Camera,
     Laptop,
     Studio,
-    Promotion,
+    Products,
     PC,
     Accessories,
     Order,
@@ -41,18 +41,25 @@ export default function Router() {
                         </Loader>
                     ),
                 },
+                { path: "/product", element: <Products /> },
                 { path: "/laptop", element: <Laptop /> },
                 { path: "/studio", element: <Studio /> },
                 { path: "/smartphone", element: <SmartPhone /> },
                 { path: "/camera", element: <Camera /> },
-                { path: "/accessories", element: <Accessories /> },
+                { path: "/accessory", element: <Accessories /> },
                 { path: "/pc", element: <PC /> },
-                { path: "/tivi", element: <Tivi /> },
-                { path: "/promotion", element: <Promotion /> },
+                { path: "/tv", element: <Tivi /> },
                 { path: "/member", element: <HomeMember /> },
                 { path: "/user/wishlist", element: <WishList /> },
                 { path: "/user/cart", element: <Cart /> },
-                { path: "/user/checkout", element: <CheckOut /> },
+                {
+                    path: "/user/checkout",
+                    element: (
+                        <Loader>
+                            <CheckOut />
+                        </Loader>
+                    ),
+                },
             ],
         },
         {
@@ -72,47 +79,114 @@ export default function Router() {
         {
             path: "/product",
             element: <DefaultLayout />,
-            children: [{ path: ":id", element: <SingleProduct /> }],
+            children: [
+                {
+                    path: ":id",
+                    element: (
+                        <Loader>
+                            <SingleProduct />
+                        </Loader>
+                    ),
+                },
+            ],
         },
         {
             path: "/smartphone",
             element: <DefaultLayout />,
-            children: [{ path: ":id", element: <SingleProduct /> }],
+            children: [
+                {
+                    path: ":id",
+                    element: (
+                        <Loader>
+                            <SingleProduct />
+                        </Loader>
+                    ),
+                },
+            ],
         },
         {
             path: "/laptop",
             element: <DefaultLayout />,
-            children: [{ path: ":id", element: <SingleProduct /> }],
+            children: [
+                {
+                    path: ":id",
+                    element: (
+                        <Loader>
+                            <SingleProduct />
+                        </Loader>
+                    ),
+                },
+            ],
         },
         {
             path: "/studio",
             element: <DefaultLayout />,
-            children: [{ path: ":id", element: <SingleProduct /> }],
+            children: [
+                {
+                    path: ":id",
+                    element: (
+                        <Loader>
+                            <SingleProduct />
+                        </Loader>
+                    ),
+                },
+            ],
         },
         {
             path: "/camera",
             element: <DefaultLayout />,
-            children: [{ path: ":id", element: <SingleProduct /> }],
+            children: [
+                {
+                    path: ":id",
+                    element: (
+                        <Loader>
+                            <SingleProduct />
+                        </Loader>
+                    ),
+                },
+            ],
         },
         {
-            path: "/accessories",
+            path: "/accessory",
             element: <DefaultLayout />,
-            children: [{ path: ":id", element: <SingleProduct /> }],
+            children: [
+                {
+                    path: ":id",
+                    element: (
+                        <Loader>
+                            <SingleProduct />
+                        </Loader>
+                    ),
+                },
+            ],
         },
         {
             path: "/pc",
             element: <DefaultLayout />,
-            children: [{ path: ":id", element: <SingleProduct /> }],
+            children: [
+                {
+                    path: ":id",
+                    element: (
+                        <Loader>
+                            <SingleProduct />
+                        </Loader>
+                    ),
+                },
+            ],
         },
         {
-            path: "/tivi",
+            path: "/tv",
             element: <DefaultLayout />,
-            children: [{ path: ":id", element: <SingleProduct /> }],
-        },
-        {
-            path: "/promotion",
-            element: <DefaultLayout />,
-            children: [{ path: ":id", element: <SingleProduct /> }],
+            children: [
+                {
+                    path: ":id",
+                    element: (
+                        <Loader>
+                            <SingleProduct />
+                        </Loader>
+                    ),
+                },
+            ],
         },
         {
             element: <Authentication />,

@@ -1,16 +1,6 @@
-import { Fragment } from "react"
-import {
-    Route,
-    BrowserRouter,
-    Routes,
-    redirect as Redirect,
-    Navigate,
-} from "react-router-dom"
-import { DefaultLayout } from "./layout"
-import { publicRoutes, privateRoutes } from "./routes"
-import Router from "./routes"
-
+import { BrowserRouter } from "react-router-dom"
 import { store } from "./app/store"
+import Router from "./routes"
 import { Provider } from "react-redux"
 
 const App = () => {

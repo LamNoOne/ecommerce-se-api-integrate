@@ -45,7 +45,7 @@ const CartProduct = (props) => {
                 />
             </div>
             <div className="w-full h-full flex justify-start items-center gap-6">
-                <span className="ms-6 sub-total">
+                <span className="ms-6 sub-total min-w-[100px]">
                     $ {price * numberProduct}
                 </span>
                 <button

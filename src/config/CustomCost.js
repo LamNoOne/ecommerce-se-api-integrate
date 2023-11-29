@@ -1,3 +1,3 @@
 export default function formatCurrency(amount) {
-    return '$' + amount.toLocaleString();
+    return '$' + Math.floor(amount).toLocaleString();
 }

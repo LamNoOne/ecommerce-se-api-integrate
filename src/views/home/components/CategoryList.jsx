@@ -1,4 +1,3 @@
-import PropsType from "prop-types"
 import { Button, CardProduct } from "~/components"
 import CategoryRectangle from "~/components/icon/CategoryRectangle"
 import { useGetLimitProductQuery } from "~/features/products/productApiSlice"
@@ -65,16 +64,6 @@ const CategoryList = (props) => {
             )}
         </div>
     )
-}
-
-CategoryList.propsType = {
-    CategoryModule: PropsType.element.isRequired,
-    Line: PropsType.element,
-    Button: PropsType.element,
-    Timer: PropsType.element,
-    items: PropsType.array.isRequired,
-    titleCategory: PropsType.string.isRequired,
-    titleEvent: PropsType.string.isRequired,
 }
 
 export default CategoryList

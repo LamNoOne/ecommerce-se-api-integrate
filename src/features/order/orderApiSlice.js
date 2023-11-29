@@ -7,13 +7,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
             providesTags: ["Order"],
         }),
         getOrderById: builder.query({
-            query: (id) => {
-                let userId = ""
-                if (localStorage.getItem("user")) {
-                    userId = JSON.parse(localStorage.getItem("user"))?.id
-                }
-                return `/api/orders/${id}/${userId}`
-            },
+            query: (id) => `/api/checkout/get-order?orderId=${id}`,
         }),
         createOrder: builder.mutation({
             query: (initialOrder) => ({

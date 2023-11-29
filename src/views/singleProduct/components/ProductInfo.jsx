@@ -3,31 +3,28 @@ import ReactStars from "react-stars"
 import style from "~/style/index"
 import { useState } from "react"
 import { Line, Button } from "~/components"
-import images from "~/assets/images"
-import { Delivery, Return, WishlistIcon } from "~/components/icon"
-import { useNavigate, useParams } from "react-router-dom"
+import { Delivery, Return } from "~/components/icon"
+import { PiShoppingCartThin } from "react-icons/pi"
+import { useNavigate } from "react-router-dom"
 import { useAddCartMutation } from "~/features/cart/cartApiSlice"
-// useparams to get product id
-// useSeletor to get individual product info
-// not recieve props from outside
 
 const ProductInfo = (props) => {
-    const [addCart, { isLoading }] = useAddCartMutation()
     const navigate = useNavigate()
+    const [addCart, { isLoading }] = useAddCartMutation()
 
     const [quantity, setQuantity] = useState(1)
     const [sizeType, setSizeType] = useState("")
     const [type, setType] = useState("")
-    const [wishlistActive, setWishListActive] = useState(false)
+
     const {
         id: productId,
+        imageUrl,
         name,
-        rating,
-        totalRating,
         price,
         description,
         stockQuantity,
     } = props?.metadata?.product
+
     const handleQuantityOnChange = (value) => setQuantity(value)
     const increment = () => setQuantity((a) => a + 1)
     const decrement = () => {
@@ -36,29 +33,19 @@ const ProductInfo = (props) => {
         }
     }
 
-    const handleAddWishList = () => {
-        wishlistActive ? setWishListActive(false) : setWishListActive(true)
-        // handle dispacth add product to wishlist or remove from wishlist
-    }
-
-    const handleOnClick = async () => {
-        // not store on sesssion
-        // sessionStorage.setItem('orderQuantity', quantity)
-        // sessionStorage.setItem('orderId', productId)
-        // call api create product cart when click buy
-        // navigate to checkout
-        // at checkout, get product from cart => info => order
-        // at order => add multiple product
-        // useNavigate to Checkout
-
+    const addToCartHandler = async () => {
         if (!isLoading) {
             try {
-                await addCart({ productId, quantity }).unwrap()
-                navigate('/user/checkout')
+                await addCart({ productId, quantity })
+                // anounce the status using toast message
             } catch (error) {
-                console.log('Failed to add to cart', error)
+                console.error(error)
             }
         }
+    }
+
+    const buyProductHandler = () => {
+        navigate("/user/checkout", { state: { productId, quantity, name, imageUrl, price } })
     }
     // Neu color khac thi gia co khac khong
     const colors = ["White", "Black"]
@@ -74,25 +61,35 @@ const ProductInfo = (props) => {
                         <ReactStars
                             count={5}
                             size={24}
-                            value={Number(rating) || 5}
+                            value={4}
                             edit={false}
                             color2={"#FFAD33"}
                         />
                         <span className="flex text-sm font-semibold font-[Poppins] text-black opacity-50 pt-[2px]">
-                            {`(${totalRating || "150"})`}
+                            50
                         </span>
                     </div>
                     <div className="text-[rgba(0,0,0,0.5)]">|</div>
-                    <div className="">
-                        {stockQuantity ? "In Stock" : "Out Of Stock"}
+                    <div className="text-base">
+                        {stockQuantity ? (
+                            <span>
+                                In Stock{" "}
+                                <span className="text-[#db4444]">{`(${stockQuantity})`}</span>
+                            </span>
+                        ) : (
+                            "Out Of Stock"
+                        )}
                     </div>
                 </div>
                 <span className="font-[Inter] text-2xl leading-6 font-normal tracking-[0.72px] mb-2">
-                    ${`${price || "192"}.00`}
+                    ${`${price}.00`}
                 </span>
-                <p className="font-[Poppins] text-sm leading-[21px] mt-4">
-                    {description ||
-                        "PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive."}
+                <p className="font-[Poppins] text-sm text-[#4a4a4a] leading-[21px] mt-4">
+                    {description} Aliqua tempor cupidatat consectetur aute esse
+                    sunt eiusmod eu voluptate. Id deserunt est occaecat culpa.
+                    Cupidatat officia duis minim irure deserunt quis minim anim
+                    sit fugiat officia aliquip. Ad consectetur reprehenderit do
+                    deserunt adipisicing.
                 </p>
                 <div className="mt-4 mb-4">
                     <Line style={style.lineStyleCart} />
@@ -116,15 +113,15 @@ const ProductInfo = (props) => {
                                 <div className="flex items-center">
                                     <img
                                         className="w-[30px] h-[30px] object-contain"
-                                        src={images.game_1}
+                                        src={imageUrl}
                                     />
                                 </div>
                                 <div className="flex flex-col items-start justify-center">
-                                    <h5 className="text-sm font-light">
+                                    <h5 className="text-sm text-[#4a4a4a] font-medium">
                                         {color}
                                     </h5>
-                                    <span className="text-sm font-light">
-                                        {price || "$192.00"}
+                                    <span className="text-sm text-[#4a4a4a]">
+                                        {`$${price}`}
                                     </span>
                                 </div>
                             </button>
@@ -181,28 +178,20 @@ const ProductInfo = (props) => {
                         <span className="text-xl">+</span>
                     </button>
                 </div>
-                <div className="buy-btn">
-                    <Button
-                        primary
-                        medium
-                        type="submit"
-                        onClick={() => handleOnClick()}
-                    >
-                        <span className="text-base font-medium">Buy Now</span>
-                    </Button>
-                </div>
-                <div className="wishlist">
-                    <button
-                        className={`w-[44px] h-[44px] flex items-center justify-center rounded border-[2px] border-[#ccc] ${
-                            wishlistActive
-                                ? "border-[#db4444] bg-[#db4444]"
-                                : ""
-                        }`}
-                        onClick={() => handleAddWishList()}
-                    >
-                        <WishlistIcon />
-                    </button>
-                </div>
+                <Button
+                    primary
+                    medium
+                    type="submit"
+                    onClick={() => buyProductHandler()}
+                >
+                    Buy Now
+                </Button>
+                <Button onClick={() => addToCartHandler()}>
+                    <span className="hover:text-[#DB4444] hover:font-medium text-xs text-[#4a4a4a] flex flex-col items-center">
+                        <PiShoppingCartThin size={32} color="#DB4444" />
+                        Add to Cart
+                    </span>
+                </Button>
             </div>
             <div className="border-[2px] border-[#ccc]">
                 <div className="flex items-center gap-4 justify-start ms-4 mt-4">

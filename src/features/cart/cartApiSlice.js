@@ -3,17 +3,17 @@ import { apiSlice } from "~/app/api/apiSlice"
 export const cartApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getCartByUserId: builder.query({
-            query: () => "/api/carts/get-by-user-id",
+            query: () => "/api/carts/get-my-cart",
             providesTags: ["Cart"],
         }),
         addCart: builder.mutation({
-            query: (cartInfo) => ({
+            query: (params) => ({
                 url: "/api/carts/add-to-cart",
                 method: "POST",
                 body: {
                     cartId: JSON.parse(localStorage.getItem('user'))?.id,
-                    productId: cartInfo.productId,
-                    quantity: cartInfo.quantity,
+                    productId: params.productId,
+                    quantity: params.quantity,
                 },
             }),
             invalidatesTags: ["Cart"],

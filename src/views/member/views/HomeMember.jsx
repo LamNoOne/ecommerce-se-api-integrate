@@ -2,8 +2,7 @@ import React from "react"
 import SideBar from "../components/SideBar"
 import { useNavigate } from "react-router-dom"
 import { FaRegCalendarCheck } from "react-icons/fa"
-import { TbMedal2 } from "react-icons/tb"
-import { AiOutlineDollar } from "react-icons/ai"
+
 import images from "~/assets/images"
 
 const HomeMember = () => {

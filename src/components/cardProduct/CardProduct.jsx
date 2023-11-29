@@ -1,25 +1,27 @@
 import React, { useState } from "react"
 import ReactStars from "react-stars"
 import { FiHeart } from "react-icons/fi"
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import formatCurrency from "~/config/CustomCost"
+import { Discount } from "../icon"
 
 const CardProduct = (props) => {
+    const { id, name, price, stockQuantity, imageUrl } = props
     const [click, setClick] = useState(false)
     const navigate = useNavigate()
-    let location = useLocation()
-    const { id, name, price, stockQuantity, imageUrl } = props
+    const oldPrice = price + 9999
+    const percent = Math.floor(100 * (1 - price / oldPrice))
     return (
-        <section className="product-item cursor-pointer flex flex-col relative border border-[#F5F5F5] rounded shadow-sm overflow-hidden">
+        <section className="product-item p-[10px] cursor-pointer flex flex-col relative border-[2px] border-[#F5F5F5] rounded-lg shadow-sm">
             <div
-                onClick={() =>
-                    navigate(
-                        location.pathname === "/" ? `product/${id}` : `${id}`
-                    )
-                }
-                className="product-img-container p-3"
+                onClick={() => navigate(`/product/${id}`)}
+                className="product-img-container mt-[10px]"
             >
-                <div className="product-img flex justify-center items-center">
+                <div className="w-[100px] h-[28px] object-contain absolute top-0 -left-1">
+                    <Discount />
+                    <p className="text-xs text-white font-medium absolute top-2 left-2">{`Discount ${percent}%`}</p>
+                </div>
+                <div className="product-img mt-[10px] flex justify-center items-center">
                     <img
                         src={imageUrl}
                         alt="product"
@@ -29,14 +31,16 @@ const CardProduct = (props) => {
             </div>
             <div className="product-info pt-4 ps-[10px]">
                 <div className="flex flex-col gap-2 items-start">
-                    <h1 className="text-sm font-semibold font-[Poppins] text-black">
+                    <h1 className="text-sm text-left font-semibold font-[Poppins] text-black">
                         {name}
                     </h1>
                     <div className="flex items-center justify-start gap-3">
                         <span className="text-base font-medium font-[Poppins] text-[#DB4444]">{`${formatCurrency(
                             price
                         )}`}</span>
-                        <span className="text-base font-medium font-[Poppins] line-through text-[#000] opacity-50"></span>
+                        <span className="text-sm font-medium font-[Poppins] line-through text-[#000] opacity-50">{`${formatCurrency(
+                            oldPrice
+                        )}`}</span>
                     </div>
                     <div className="flex flex-row items-center justify-between">
                         <div className="flex justify-start items-center gap-2 -mt-2">
@@ -52,7 +56,7 @@ const CardProduct = (props) => {
                             </span>
                         </div>
 
-                        <div className="w-[30px] h-[30px] bg-transparent">
+                        <div className="w-[30px] h-[30px] -mt-2 bg-transparent">
                             <FiHeart
                                 className="heart"
                                 size={20}

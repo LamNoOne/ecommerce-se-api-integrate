@@ -3,7 +3,7 @@ import { Line } from "~/components"
 import { PaymentIcon } from "~/components/icon"
 import style from "~/style"
 
-const PaymentBox = ({ total, orderStatus }) => {
+const PaymentBox = ({ total, orderStatus, orderPaymentForm }) => {
     return (
         <div className="payment-box-container shadow-md border rounded-lg px-4 py-5">
             <div className="payment-header flex items-center justify-start gap-4 mb-4">
@@ -26,6 +26,14 @@ const PaymentBox = ({ total, orderStatus }) => {
                     <span className="text-sm text-[#4a4a4a]">Free</span>
                 </div>
                 <Line style={style.lineStyleCart} />
+                <div className="flex items-center justify-between payment-required">
+                    <h5 className="text-sm text-[#717171]">
+                        Payment form:
+                    </h5>
+                    <span className="text-sm text-[#4a4a4a] font-semibold">
+                        {orderPaymentForm}
+                    </span>
+                </div>
                 <div className="flex items-center justify-between payment-required">
                     <h5 className="text-sm text-[#717171]">
                         Required payment:

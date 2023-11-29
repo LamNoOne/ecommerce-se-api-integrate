@@ -7,9 +7,10 @@ import { Line, Button } from "~/components"
 import images from "~/assets/images"
 import styles from "./Form.module.scss"
 import { useNavigate } from "react-router-dom"
-import { useGetUserQuery } from "~/features/auth/authApiSlice"
+import { useGetUserQuery } from "~/features/user/userApiSlice"
 import { useCreateOrderMutation } from "~/features/order/orderApiSlice"
 import { useGetCartByUserIdQuery } from "~/features/cart/cartApiSlice"
+import getUserInfoFromLocalStorage from "~/config/GetUserInfo"
 
 const cx = classNames.bind(styles)
 
@@ -39,9 +40,12 @@ const requiredFields = Object.keys(fieldNames).filter(
     (key) => fieldNames[key][1]
 )
 
-const CheckOutForm = () => {
+const CheckOutForm = (singlePurchasedProduct) => {
     const navigate = useNavigate()
     const [createOrder] = useCreateOrderMutation()
+    const isOrderFromCart = Object.keys(singlePurchasedProduct).length === 0
+
+    // Get from state, when have time i'll handle it
     const {
         data: user,
         isLoading,
@@ -70,12 +74,18 @@ const CheckOutForm = () => {
     }
 
     let cartProduct
-    if (isLoadingCart) {
-        cartProduct = <p>Loading...</p>
-    } else if (isSuccessCart) {
-        cartProduct = cart?.metadata?.cart?.products
-    } else if (isError) {
-        cartProduct = <p>{errorCart}</p>
+    // If customer buy a single product which doesn't have in cart
+    // singlePurchasedProduct contains enough information to create order
+    if (isOrderFromCart) {
+        if (isLoadingCart) {
+            cartProduct = <p>Loading...</p>
+        } else if (isSuccessCart) {
+            cartProduct = cart?.metadata?.cart?.products
+        } else if (isErrorCart) {
+            cartProduct = <p>{errorCart}</p>
+        }
+    } else {
+        cartProduct = singlePurchasedProduct
     }
 
     let orderProducts
@@ -84,6 +94,13 @@ const CheckOutForm = () => {
             productId: product?.product?.id,
             quantity: product?.quantity,
         }))
+    } else {
+        orderProducts = [
+            {
+                productId: cartProduct?.productId,
+                quantity: cartProduct?.quantity,
+            },
+        ]
     }
 
     let sumTotal = Array.isArray(cartProduct)
@@ -91,10 +108,11 @@ const CheckOutForm = () => {
               (acc, cur) => acc + cur?.quantity * cur?.product?.price,
               0
           )
-        : 0
+        : cartProduct?.quantity * cartProduct?.price
 
     const handleCreateOrder = async (values, orderProducts) => {
         const orderInfo = {
+            cartId: getUserInfoFromLocalStorage()?.id,
             shipAddress: values.streetAdrress,
             phoneNumber: values.phoneNumber,
             paymentFormId: values.paymentFormId,
@@ -102,11 +120,15 @@ const CheckOutForm = () => {
         }
 
         try {
+            // if is isOrderFromCart => then createOrder()
+            // else createOrderFromPage()
             const result = await createOrder(orderInfo).unwrap()
-            console.log(result)
             // Waiting until back-end fix api/id permission
             // get orderId = result?.metadata.orderId
             // navigate('/orders/orderId') to display order info on front-end
+            if (result) {
+                navigate(`/member/order/${result?.metadata?.orderId}`)
+            }
         } catch (error) {
             console.error("Error creating order", error)
         }

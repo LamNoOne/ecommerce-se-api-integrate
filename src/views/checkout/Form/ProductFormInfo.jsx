@@ -1,15 +1,16 @@
 import React from "react"
-import images from "~/assets/images"
-import { useGetCartByUserIdQuery } from "~/features/cart/cartApiSlice"
 //props or useSelector to get the state
 
 const ProductFormInfo = ({ carts }) => {
     let content
-    if (typeof carts == "object") {
+    if (Array.isArray(carts)) {
         content = (
             <>
-                {Array.isArray(carts) && carts.map((cart, index) => (
-                    <div className="flex items-center justify-between w-full">
+                {carts.map((cart, index) => (
+                    <div
+                        key={index}
+                        className="flex items-center justify-between w-full"
+                    >
                         <div className="flex items-center gap-6">
                             <img
                                 className="w-[54px] h-[54px] p-1 object-contain"
@@ -34,6 +35,30 @@ const ProductFormInfo = ({ carts }) => {
                     </div>
                 ))}
             </>
+        )
+    } else {
+        content = (
+            <div
+                className="flex items-center justify-between w-full"
+            >
+                <div className="flex items-center gap-6">
+                    <img
+                        className="w-[54px] h-[54px] p-1 object-contain"
+                        src={carts?.imageUrl}
+                    />
+                    <h3 className="text-base">{carts?.name}</h3>
+                </div>
+                <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-2">
+                        <span className="quantity">{carts?.quantity}</span>
+                        <span className="">&times;</span>
+                        <span className="price">{carts?.price}</span>
+                    </div>
+                    <p className="text-base">
+                        {carts?.quantity * carts?.price}
+                    </p>
+                </div>
+            </div>
         )
     }
 

@@ -1,35 +1,49 @@
-import { Advertisement, Category, PageButton, CardProduct } from "~/components"
+import { Advertisement, Category, PageButton } from "~/components"
 import { advertisement, category } from "~/components/variables"
 import style from "~/style"
-import {
-    FaSortAmountDown,
-    FaSortAmountDownAlt,
-    FaPercent,
-    FaEye,
-} from "react-icons/fa"
-import { useState, useEffect } from "react"
-// import {products} from './data'
+import { GrPowerReset } from "react-icons/gr"
+import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa"
+import { Product } from "~/components"
+import { useState } from "react"
 import { useGetAllProductQuery } from "~/features/products/productApiSlice"
 
-const Promotion = () => {
+const Products = () => {
     const [page, setPage] = useState(1)
-    const [sortActive, setSortActive] = useState("")
+    const [sortActive, setSortActive] = useState(null)
 
     const {
         data: products,
         isLoading,
-        isFetching,
         isSuccess,
         isError,
         error,
-    } = useGetAllProductQuery(page)
-    console.log(products?.metadata?.products)
+    } = useGetAllProductQuery({
+        page,
+        order: sortActive,
+    })
 
-    if (isLoading) return <p>Loading Products...</p>
+    let content
+    if (isLoading) {
+        content = <p>Loading...</p>
+    } else if (isSuccess) {
+        content = <Product products={products?.metadata?.products} />
+    } else if (isError) {
+        content = <p>{error}</p>
+    }
 
-    const content = products?.metadata?.products.map((product) => (
-        <CardProduct key={product.id} {...product} />
-    ))
+    const sort = {
+        asc: [FaSortAmountDown, "Price Low-High"],
+        desc: [FaSortAmountDownAlt, "Price High-Low"],
+        reset: [GrPowerReset, "Reset"],
+    }
+
+    const sortActiveHandler = (key) => {
+        if (String(key) !== 'reset') {
+            setSortActive(key)
+        } else {
+            setSortActive(null)
+        }
+    }
 
     const lastPage = () => setPage(products?.metadata?.totalPage)
 
@@ -38,20 +52,21 @@ const Promotion = () => {
     const pagesArray = Array(products?.metadata?.totalPage)
         .fill()
         .map((_, index) => index + 1)
-    console.log(pagesArray)
-    // useSelector to get product state
-    // console.log(sortActive)
 
     const nav = (
-        <nav className="nav-ex2 flex items-center gap-3">
-            <button className="text-xl text-white w-[32px] h-[32px] rounded-lg bg-slate-500 disabled:bg-slate-300" onClick={firstPage} disabled={page === 1}>
+        <nav className="nav-ex2 flex items-center justify-center gap-3">
+            <button
+                className="text-xl text-white w-[32px] h-[32px] rounded-lg bg-slate-500 disabled:bg-slate-300"
+                onClick={firstPage}
+                disabled={page === 1}
+            >
                 &lt;&lt;
             </button>
-            {/* Removed isPreviousData from PageButton to keep button focus color instead */}
             {pagesArray.map((pg) => (
                 <PageButton key={pg} pg={pg} setPage={setPage} />
             ))}
-            <button className="text-xl text-white w-[32px] h-[32px] rounded-lg bg-slate-500 disabled:bg-slate-300"
+            <button
+                className="text-xl text-white w-[32px] h-[32px] rounded-lg bg-slate-500 disabled:bg-slate-300"
                 onClick={lastPage}
                 disabled={page === products?.metadata?.totalPage}
             >
@@ -59,13 +74,6 @@ const Promotion = () => {
             </button>
         </nav>
     )
-
-    const sort = {
-        increment: [FaSortAmountDown, "Price High-Low"],
-        decrement: [FaSortAmountDownAlt, "Price Low-High"],
-        promotion: [FaPercent, "Hot Promotion"],
-        view: [FaEye, "Most View"],
-    }
 
     return (
         <div className="flex flex-col gap-16 mb-8">
@@ -85,7 +93,7 @@ const Promotion = () => {
                     <div className="btn-sort flex gap-4">
                         {Object.entries(sort).map(([key, [Icon, title]]) => (
                             <button
-                                onClick={() => setSortActive(key)}
+                                onClick={() => sortActiveHandler(key)}
                                 key={key}
                                 className={`sort-decrement flex items-center justify-around gap-3 px-2 rounded bg-[#f3f4f6] border ${
                                     key === sortActive
@@ -110,15 +118,10 @@ const Promotion = () => {
                     </div>
                 </div>
             </section>
-            <div className="grid grid-cols-5 gap-x-[10px] gap-y-[10px]">
-                {/* {products.map((item, index) => (
-                    <CardProduct key={index} {...item} />
-                ))} */}
-                {content}
-            </div>
+            {content}
             {nav}
         </div>
     )
 }
 
-export default Promotion
+export default Products

@@ -1,4 +1,3 @@
-import PropsType from "prop-types"
 import { useRef } from "react"
 import "swiper/css"
 import "swiper/css/navigation"
@@ -92,7 +91,7 @@ const ProductSlide = (props) => {
                     </div>
                 </div>
                 <div className="mb-10 -ms-96">
-                    {Timer && <Timer year={2023} month={11} day={27} />}
+                    {Timer && <Timer year={2023} month={12} day={12} />}
                 </div>
 
                 <div className="swiper-nav-btns mb-10">

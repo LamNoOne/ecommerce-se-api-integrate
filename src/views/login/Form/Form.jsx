@@ -4,16 +4,13 @@ import * as Yup from "yup"
 import classNames from "classnames/bind"
 import { Link } from "react-router-dom"
 import styles from "./Form.module.scss"
-import {useLoginMutation} from '~/features/auth/authApiSlice'
-import {setCredentials} from '~/features/auth/authSlice'
-import { useDispatch } from "react-redux"
+import { useLoginMutation } from "~/features/auth/authApiSlice"
 import { useNavigate } from "react-router-dom"
 const cx = classNames.bind(styles)
 
 const logInSchema = Yup.object().shape({
     username: Yup.string().required("User is required"),
-    password: Yup.string()
-        .required("Password is required")
+    password: Yup.string().required("Password is required"),
 })
 
 const initialValues = {
@@ -22,17 +19,16 @@ const initialValues = {
 }
 
 const LoginForm = () => {
-    const dispatch = useDispatch()
     const navigate = useNavigate()
     const [login] = useLoginMutation()
 
     const handleSubmit = async (values) => {
         try {
             const userData = await login(values).unwrap()
-            localStorage.setItem('user', JSON.stringify(userData.metadata.user))
-            navigate('/')
+            localStorage.setItem("user", JSON.stringify(userData.metadata.user))
+            navigate("/")
         } catch (err) {
-           console.log(err)
+            console.log(err)
         }
     }
 
@@ -87,7 +83,7 @@ const LoginForm = () => {
                                 />
                             </div>
 
-                            <div className={cx('forgot-password-container')}>
+                            <div className={cx("forgot-password-container")}>
                                 <button
                                     type="submit"
                                     className={
