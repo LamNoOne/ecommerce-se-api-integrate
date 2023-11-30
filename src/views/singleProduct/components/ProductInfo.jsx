@@ -4,7 +4,7 @@ import style from "~/style/index"
 import { useState } from "react"
 import { Line, Button } from "~/components"
 import { Delivery, Return } from "~/components/icon"
-import { PiShoppingCartThin } from "react-icons/pi"
+import { PiShoppingCartBold } from "react-icons/pi"
 import { useNavigate } from "react-router-dom"
 import { useAddCartMutation } from "~/features/cart/cartApiSlice"
 
@@ -188,7 +188,7 @@ const ProductInfo = (props) => {
                 </Button>
                 <Button onClick={() => addToCartHandler()}>
                     <span className="hover:text-[#DB4444] hover:font-medium text-xs text-[#4a4a4a] flex flex-col items-center">
-                        <PiShoppingCartThin size={32} color="#DB4444" />
+                        <PiShoppingCartBold size={32} color="#DB4444" />
                         Add to Cart
                     </span>
                 </Button>

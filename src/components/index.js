@@ -14,6 +14,7 @@ import Popup from "./popup"
 import Search from "./search"
 import PageButton from "./pageButton"
 import Loader from "./loader"
+import LoaderSearch from "./loaderSearch"
 import Product from "./product"
 import Technical from "./technical"
 
@@ -35,5 +36,6 @@ export {
     PageButton,
     Loader,
     Product,
-    Technical
+    Technical,
+    LoaderSearch
 }

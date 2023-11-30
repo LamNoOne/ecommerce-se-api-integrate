@@ -1,26 +1,43 @@
 import React, { useState } from "react"
 import { RiDeleteBinLine } from "react-icons/ri"
-// import { updateProductCartQuantity } from 'cartApiSlice'
+import {
+    useUpdateProductCartQuantityMutation,
+    useDeleteProductFromCartMutation,
+} from "~/features/cart/cartApiSlice"
+
 const CartProduct = (props) => {
     const { quantity, product } = props
-    const { name, imageUrl, price } = product
+    const { id: productId, name, imageUrl, price } = product
     const [numberProduct, setNumberProduct] = useState(quantity)
-    // const [updateCart, { isLoading }] = updateProductCartQuantity()
-    const handleDeleteCart = () => {
-        // dispatch action delete cart
-        console.log("delete cart")
+    const [deleteProductFromCart] = useDeleteProductFromCartMutation()
+    const [updateProductCartQuantity, { isLoading }] =
+        useUpdateProductCartQuantityMutation()
+
+    const handleDeleteCart = async () => {
+        try {
+            await deleteProductFromCart({ id: productId }).unwrap()
+        } catch (error) {
+            console.error(error)
+        }
     }
 
-    const handleUpdateQuantity = (e) => {
-        setNumberProduct(e.target.value)
-        // if(!isLoading) {
-        //     try {
-        //         await updateCart(data)
-        //     } catch (error) {
-        //         console.error(error)
-        //     }
-        // }
+    const handleUpdateQuantity = async (e) => {
+        let value = e.target.value
+        if (value < 0) value = 0
+        setNumberProduct(value)
+
+        if (!isLoading) {
+            try {
+                await updateProductCartQuantity({
+                    productId,
+                    quantity: value,
+                }).unwrap()
+            } catch (error) {
+                console.error(error)
+            }
+        }
     }
+
     return (
         <div className="grid grid-cart grid-cols-5 grid-flow-row place-items-start rounded h-[102px]">
             <div className="col-span-2 item flex gap-5 w-full h-full justify-start items-center place-self-start">

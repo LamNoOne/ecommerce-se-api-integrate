@@ -11,27 +11,41 @@ export const cartApiSlice = apiSlice.injectEndpoints({
                 url: "/api/carts/add-to-cart",
                 method: "POST",
                 body: {
-                    cartId: JSON.parse(localStorage.getItem('user'))?.id,
+                    cartId: JSON.parse(localStorage.getItem("user"))?.id,
                     productId: params.productId,
                     quantity: params.quantity,
                 },
             }),
             invalidatesTags: ["Cart"],
         }),
-        //Wait for back-end fix
-        // updateProductCartQuantity: builder.mutation({
-        //     query: (cartProductInfo) => ({
-        //         url: '/api/carts/reduce-quantity-product',
-        //         // back-end use POST instead
-        //         method: 'PATCH',
-        //         body: {
-        //             cartId: 1,
-        //             productId: cartProductInfo.productId,
-        //             quantity: cartProductInfo.quantity
-        //         }
-        //     })
-        // })
+        updateProductCartQuantity: builder.mutation({
+            query: (params) => ({
+                url: "/api/carts/update-quantity-product",
+                method: "PATCH",
+                body: {
+                    cartId: JSON.parse(localStorage.getItem("user"))?.id,
+                    productId: params.productId,
+                    quantity: params.quantity,
+                },
+            }),
+            invalidatesTags: ["Cart"],
+        }),
+        deleteProductFromCart: builder.mutation({
+            query: ({ id }) => {
+                const cartId = JSON.parse(localStorage.getItem("user"))?.id
+                return {
+                    url: `/api/carts/delete-product-from-cart?cartId=${cartId}&productId=${id}`,
+                    method: "DELETE",
+                }
+            },
+            invalidatesTags: ["Cart"],
+        }),
     }),
 })
 
-export const { useAddCartMutation, useGetCartByUserIdQuery } = cartApiSlice
+export const {
+    useAddCartMutation,
+    useGetCartByUserIdQuery,
+    useUpdateProductCartQuantityMutation,
+    useDeleteProductFromCartMutation
+} = cartApiSlice

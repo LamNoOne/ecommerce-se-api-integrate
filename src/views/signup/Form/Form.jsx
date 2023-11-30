@@ -4,9 +4,15 @@ import * as Yup from "yup"
 import classNames from "classnames/bind"
 import { Link } from "react-router-dom"
 import styles from "./Form.module.scss"
+import { useSignupMutation } from "~/features/auth/authApiSlice"
+import { useNavigate } from "react-router-dom"
 const cx = classNames.bind(styles)
 
 const signUpSchema = Yup.object().shape({
+    username: Yup.string()
+        .min(2, "Too Short!")
+        .max(50, "Too Long!")
+        .required("Username is required"),
     firstName: Yup.string()
         .min(2, "Too Short!")
         .max(50, "Too Long!")
@@ -17,11 +23,20 @@ const signUpSchema = Yup.object().shape({
         .max(50, "Too Long!")
         .required("Lastname is required"),
 
-    // phoneNumber: Yup.string()
-    //     .required("Phone number is required")
-    //     .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g, "Invalid phone number"),
+    gender: Yup.string().required("Gender is required"),
 
-    email: Yup.string().email('Invalid email address').required("Email is required"),
+    phoneNumber: Yup.string()
+        .required("Phone number is required")
+        .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g, "Invalid phone number"),
+
+    email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+
+    address: Yup.string()
+        .min(2, "Too Short!")
+        .max(100, "Too Long!")
+        .required("Address is required"),
 
     password: Yup.string()
         .required("Password is required")
@@ -33,21 +48,35 @@ const signUpSchema = Yup.object().shape({
 })
 
 const initialValues = {
+    username: "",
     firstName: "",
     lastName: "",
     phoneNumber: "",
     email: "",
+    address: "",
     password: "",
     passwordConfirmation: "",
 }
 
 const SignUpForm = () => {
+    const navigate = useNavigate()
+    const [signup, { isLoading }] = useSignupMutation()
+    
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={signUpSchema}
-            onSubmit={(values) => {
+            onSubmit={async (values) => {
+                delete values.passwordConfirmation
                 console.log(values)
+                if(!isLoading) {
+                    try {
+                        await signup(values)
+                        navigate('/login')
+                    } catch (error) {
+                        console.error(error)
+                    }
+                }
             }}
         >
             {(formik) => {
@@ -57,6 +86,24 @@ const SignUpForm = () => {
                         <h1>Create an account</h1>
                         <p>Enter your detail below</p>
                         <Form>
+                            <div className={cx("form-row")}>
+                                <Field
+                                    name="username"
+                                    id="username"
+                                    placeholder="User Name"
+                                    className={
+                                        errors.username && touched.username
+                                            ? cx("input-error")
+                                            : null
+                                    }
+                                />
+                                <ErrorMessage
+                                    name="username"
+                                    component="span"
+                                    className={cx("error")}
+                                />
+                            </div>
+
                             <div className={cx("form-row")}>
                                 <Field
                                     name="firstName"
@@ -93,7 +140,30 @@ const SignUpForm = () => {
                                 />
                             </div>
 
-                            {/* <div className={cx("form-row")}>
+                            <div
+                                className="flex items-center gap-8"
+                                role="group"
+                                aria-labelledby="my-radio-group"
+                            >
+                                <label className="flex items-center gap-3 m-0">
+                                    <Field
+                                        type="radio"
+                                        name="gender"
+                                        value="1"
+                                    />
+                                    <span className="text-base text-[#4a4a4a] font-medium">Male</span>
+                                </label>
+                                <label className="flex items-center gap-3 m-0">
+                                    <Field
+                                        type="radio"
+                                        name="gender"
+                                        value="0"
+                                    />
+                                    <span className="text-base text-[#4a4a4a] font-medium">Female</span>
+                                </label>
+                            </div>
+
+                            <div className={cx("form-row")}>
                                 <Field
                                     type="string"
                                     name="phoneNumber"
@@ -111,7 +181,7 @@ const SignUpForm = () => {
                                     component="span"
                                     className={cx("error")}
                                 />
-                            </div> */}
+                            </div>
 
                             <div className={cx("form-row")}>
                                 <Field
@@ -127,6 +197,25 @@ const SignUpForm = () => {
                                 />
                                 <ErrorMessage
                                     name="email"
+                                    component="span"
+                                    className={cx("error")}
+                                />
+                            </div>
+
+                            <div className={cx("form-row")}>
+                                <Field
+                                    type="address"
+                                    name="address"
+                                    id="address"
+                                    placeholder="Enter your address"
+                                    className={
+                                        errors.address && touched.address
+                                            ? cx("input-error")
+                                            : null
+                                    }
+                                />
+                                <ErrorMessage
+                                    name="address"
                                     component="span"
                                     className={cx("error")}
                                 />
@@ -158,7 +247,8 @@ const SignUpForm = () => {
                                     id="passwordConfirmation"
                                     placeholder="Confirm your password"
                                     className={
-                                        errors.passwordConfirmation && touched.passwordConfirmation
+                                        errors.passwordConfirmation &&
+                                        touched.passwordConfirmation
                                             ? "input-error"
                                             : null
                                     }

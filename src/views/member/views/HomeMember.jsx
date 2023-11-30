@@ -66,11 +66,6 @@ const HomeMember = () => {
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             <h1 className="text-base">Your Offer</h1>
-                            <div className="flex flex-row items-center">
-                                <span className="">0</span>
-                                &nbsp;
-                                <span className="">offer</span>
-                            </div>
                         </div>
                         <div className="button">
                             <button
@@ -87,11 +82,6 @@ const HomeMember = () => {
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             <h1 className="text-base">Your Orders</h1>
-                            <div className="flex flex-row items-center">
-                                <span className="">4</span>
-                                &nbsp;
-                                <span className="">orders</span>
-                            </div>
                         </div>
                         <div className="button">
                             <button
@@ -107,9 +97,8 @@ const HomeMember = () => {
                             <img src={images.rank_cellphone} />
                         </div>
                         <div className="flex flex-col items-center justify-center">
-                            <h1 className="text-base">Your Rank</h1>
                             <div className="flex flex-row items-center">
-                                <span className="">You're </span>
+                                <span className="">Rank: </span>
                                 &nbsp;
                                 <span className="">SNew</span>
                             </div>

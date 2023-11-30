@@ -8,9 +8,8 @@ import images from "~/assets/images"
 import styles from "./Form.module.scss"
 import { useNavigate } from "react-router-dom"
 import { useGetUserQuery } from "~/features/user/userApiSlice"
-import { useCreateOrderMutation } from "~/features/order/orderApiSlice"
+import { useCreateOrderFromCartMutation, useCreateOrderNowMutation } from "~/features/order/orderApiSlice"
 import { useGetCartByUserIdQuery } from "~/features/cart/cartApiSlice"
-import getUserInfoFromLocalStorage from "~/config/GetUserInfo"
 
 const cx = classNames.bind(styles)
 
@@ -42,7 +41,8 @@ const requiredFields = Object.keys(fieldNames).filter(
 
 const CheckOutForm = (singlePurchasedProduct) => {
     const navigate = useNavigate()
-    const [createOrder] = useCreateOrderMutation()
+    const [createOrderNow, { isLoading: isHandlingNow }] = useCreateOrderNowMutation()
+    const [createOrderFromCart, { isLoading: isHandlingCart }] = useCreateOrderFromCartMutation()
     const isOrderFromCart = Object.keys(singlePurchasedProduct).length === 0
 
     // Get from state, when have time i'll handle it
@@ -95,12 +95,10 @@ const CheckOutForm = (singlePurchasedProduct) => {
             quantity: product?.quantity,
         }))
     } else {
-        orderProducts = [
-            {
-                productId: cartProduct?.productId,
-                quantity: cartProduct?.quantity,
-            },
-        ]
+        orderProducts = {
+            productId: cartProduct?.productId,
+            quantity: cartProduct?.quantity,
+        }
     }
 
     let sumTotal = Array.isArray(cartProduct)
@@ -112,25 +110,26 @@ const CheckOutForm = (singlePurchasedProduct) => {
 
     const handleCreateOrder = async (values, orderProducts) => {
         const orderInfo = {
-            cartId: getUserInfoFromLocalStorage()?.id,
             shipAddress: values.streetAdrress,
             phoneNumber: values.phoneNumber,
             paymentFormId: values.paymentFormId,
-            orderProducts: orderProducts,
+            order: orderProducts,
         }
 
-        try {
-            // if is isOrderFromCart => then createOrder()
-            // else createOrderFromPage()
-            const result = await createOrder(orderInfo).unwrap()
-            // Waiting until back-end fix api/id permission
-            // get orderId = result?.metadata.orderId
-            // navigate('/orders/orderId') to display order info on front-end
-            if (result) {
+        if(isOrderFromCart && !isHandlingCart) {
+            try {
+                const result = await createOrderFromCart(orderInfo).unwrap()
                 navigate(`/member/order/${result?.metadata?.orderId}`)
+            } catch (error) {
+                console.error('Error when order from cart', error)
             }
-        } catch (error) {
-            console.error("Error creating order", error)
+        } else if(!isHandlingNow) {
+            try {
+                const result = await createOrderNow(orderInfo).unwrap()
+                navigate(`/member/order/${result?.metadata?.orderId}`)
+            } catch (error) {
+                console.error('Error when order product', error)
+            }
         }
     }
 

@@ -5,11 +5,11 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         getAllProduct: builder.query({
             query: (params) => {
                 let queryString
-                const { page = 1, order } = params
+                const { page = 1, order, limit = 100 } = params
                 if (!order) {
-                    queryString = `/api/products?_page=${page}&_limit=100`
+                    queryString = `/api/products?_page=${page}&_limit=${limit}`
                 } else {
-                    queryString = `/api/products?_page=${page}&_limit=100&_order=${order}&_sortBy=price`
+                    queryString = `/api/products?_page=${page}&_limit=${limit}&_order=${order}&_sortBy=price`
                 }
                 return queryString
             },
@@ -20,6 +20,18 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         getLimitProduct: builder.query({
             query: (limit = 10) => `/api/products?_limit=${limit}`,
         }),
+        searchProduct: builder.query({
+            query: (params) => {
+                const { page = 1, name, order, limit = 100, sortBy = "price" } = params
+                let queryString
+                if (!order && name) {
+                    queryString = `/api/products?name=${name}&_page=${page}&_limit=${limit}`
+                } else if(order && name) {
+                    queryString = `/api/products?name=${name}&_page=${page}&_limit=${limit}&_order=${order}&_sortBy=${sortBy}`
+                }
+                return queryString
+            },
+        }),
     }),
 })
 
@@ -27,4 +39,5 @@ export const {
     useGetAllProductQuery,
     useGetProductByIdQuery,
     useGetLimitProductQuery,
+    useSearchProductQuery
 } = productsApiSlice

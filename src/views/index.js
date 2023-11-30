@@ -13,6 +13,7 @@ import Accessories from "./accessories"
 import PC from "./pc"
 import Tivi from "./tivi"
 import Products from "./product"
+import ProductSearch from "./productSearch"
 import {
     HomeMember,
     Order,
@@ -50,4 +51,5 @@ export {
     Account,
     Support,
     Feedback,
+    ProductSearch
 }

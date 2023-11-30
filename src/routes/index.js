@@ -1,5 +1,6 @@
 import { useRoutes } from "react-router-dom"
 import { Loader } from "~/components"
+import RequireAuth from "~/features/auth/RequireAuth"
 import { Authentication, DefaultLayout } from "~/layout"
 import {
     Home,
@@ -26,6 +27,7 @@ import {
     Account,
     Support,
     Feedback,
+    ProductSearch,
 } from "~/views"
 
 export default function Router() {
@@ -42,6 +44,14 @@ export default function Router() {
                     ),
                 },
                 { path: "/product", element: <Products /> },
+                {
+                    path: "/product-search",
+                    element: (
+                        <Loader>
+                            <ProductSearch />
+                        </Loader>
+                    ),
+                },
                 { path: "/laptop", element: <Laptop /> },
                 { path: "/studio", element: <Studio /> },
                 { path: "/smartphone", element: <SmartPhone /> },
@@ -49,22 +59,55 @@ export default function Router() {
                 { path: "/accessory", element: <Accessories /> },
                 { path: "/pc", element: <PC /> },
                 { path: "/tv", element: <Tivi /> },
-                { path: "/member", element: <HomeMember /> },
-                { path: "/user/wishlist", element: <WishList /> },
-                { path: "/user/cart", element: <Cart /> },
+                {
+                    path: "/member",
+                    element: (
+                        <RequireAuth>
+                            <Loader>
+                                <HomeMember />
+                            </Loader>
+                        </RequireAuth>
+                    ),
+                },
+                {
+                    path: "/user/wishlist",
+                    element: (
+                        <RequireAuth>
+                            <Loader>
+                                <WishList />
+                            </Loader>
+                        </RequireAuth>
+                    ),
+                },
+                {
+                    path: "/user/cart",
+                    element: (
+                        <RequireAuth>
+                            <Loader>
+                                <Cart />
+                            </Loader>
+                        </RequireAuth>
+                    ),
+                },
                 {
                     path: "/user/checkout",
                     element: (
-                        <Loader>
-                            <CheckOut />
-                        </Loader>
+                        <RequireAuth>
+                            <Loader>
+                                <CheckOut />
+                            </Loader>
+                        </RequireAuth>
                     ),
                 },
             ],
         },
         {
             path: "/member",
-            element: <DefaultLayout />,
+            element: (
+                <RequireAuth>
+                    <DefaultLayout />
+                </RequireAuth>
+            ),
             children: [
                 { path: "order", element: <Order /> },
                 { path: "warranty", element: <Warranty /> },
