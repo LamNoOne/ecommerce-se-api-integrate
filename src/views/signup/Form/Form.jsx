@@ -23,7 +23,7 @@ const signUpSchema = Yup.object().shape({
         .max(50, "Too Long!")
         .required("Lastname is required"),
 
-    gender: Yup.string().required("Gender is required"),
+    genderId: Yup.string().required("Gender is required"),
 
     phoneNumber: Yup.string()
         .required("Phone number is required")
@@ -148,7 +148,7 @@ const SignUpForm = () => {
                                 <label className="flex items-center gap-3 m-0">
                                     <Field
                                         type="radio"
-                                        name="gender"
+                                        name="genderId"
                                         value="1"
                                     />
                                     <span className="text-base text-[#4a4a4a] font-medium">Male</span>
@@ -156,7 +156,7 @@ const SignUpForm = () => {
                                 <label className="flex items-center gap-3 m-0">
                                     <Field
                                         type="radio"
-                                        name="gender"
+                                        name="genderId"
                                         value="0"
                                     />
                                     <span className="text-base text-[#4a4a4a] font-medium">Female</span>
