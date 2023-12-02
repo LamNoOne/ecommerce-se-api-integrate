@@ -8,6 +8,7 @@ import { CiUser } from "react-icons/ci"
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "~/features/auth/authSlice"
 import { useUpdateUserInfoMutation } from "~/features/user/userApiSlice"
+import { BsWindowSidebar } from "react-icons/bs"
 
 const Account = () => {
     const userData = useSelector(selectCurrentUser)
@@ -52,6 +53,8 @@ const Account = () => {
                 address,
                 image: selectedFile,
             }).unwrap()
+            navigate('/')
+            window.location.reload()
         } catch (error) {
             console.error(error)
         }
