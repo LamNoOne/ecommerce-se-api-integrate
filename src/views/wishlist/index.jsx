@@ -1,18 +1,25 @@
 import React from "react"
 import Cart from "./components/Cart"
-import { products } from "./components/variables/data"
+import { useGetWishlistQuery } from "~/features/wishlist/wishlistApiSlice"
 
 const WishList = () => {
-    return (
-        <div className="flex flex-col gap-16 mb-20">
-            <section className="wishlist-product">
-                <Cart actionName="Move All To Bag" items={products} />
-            </section>
-            <section className="suggestion-product">
-                <Cart actionName="See All" items={products} category/>
-            </section>
-        </div>
-    )
+    const { data, isLoading, isSuccess, isError, error } = useGetWishlistQuery()
+    let content
+    if (isLoading) {
+        content = <div>Loading...</div>
+    } else if (isSuccess) {
+        const products = data?.metadata?.wishList
+        content = (
+            <div className="flex flex-col gap-16 mb-20">
+                <section className="wishlist-product">
+                    <Cart items={products} />
+                </section>
+            </div>
+        )
+    } else if (isError) {
+        content = <div>{error}</div>
+    }
+    return content
 }
 
 export default WishList

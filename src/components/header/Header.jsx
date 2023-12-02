@@ -8,14 +8,19 @@ import { useGetUserQuery } from "~/features/user/userApiSlice"
 import { useGetCartByUserIdQuery } from "~/features/cart/cartApiSlice"
 import { setCredentials } from "~/features/auth/authSlice"
 import { useDispatch } from "react-redux"
+import { useGetWishlistQuery } from "~/features/wishlist/wishlistApiSlice"
 
 const Header = (props) => {
     const dispatch = useDispatch()
+
+    const { data: wishlist, isSuccess: isWishlist} = useGetWishlistQuery()
+
     const { data: user, isSuccess: isUser } = useGetUserQuery()
 
     const { data: cart, isSuccess: isCart } = useGetCartByUserIdQuery()
 
     let cartNumber = 0
+    let wishlistNumber = 0
     let content
     if (!user) {
         content = (
@@ -33,6 +38,10 @@ const Header = (props) => {
     }
     if (isCart) {
         cartNumber = cart?.metadata?.cart?.products?.length
+    }
+
+    if(isWishlist) {
+        wishlistNumber = wishlist?.metadata?.wishList?.length
     }
 
     const { title } = props
@@ -102,8 +111,11 @@ const Header = (props) => {
                     create a div width:16px height: 16px rounded-full, pass a length to it*/}
                     <Link
                         to="/user/wishlist"
-                        className="ms-6 flex items-center"
+                        className="ms-6 flex items-center relative"
                     >
+                        <span className="absolute -top-3 -right-3 w-[24px] h-[24px] border rounded-full text-xs flex items-center justify-center text-white bg-[#DB4444]">
+                            {wishlistNumber}
+                        </span>
                         <WishlistIcon />
                     </Link>
                     {/* Get order state, after that, check if state is Array, get Array.length,

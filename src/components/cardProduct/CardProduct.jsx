@@ -4,13 +4,41 @@ import { FiHeart } from "react-icons/fi"
 import { useNavigate } from "react-router-dom"
 import formatCurrency from "~/config/CustomCost"
 import { Discount } from "../icon"
+import { useSelector } from "react-redux"
+import { selectCurrentUser } from "~/features/auth/authSlice"
+import {
+    useAddProductToWishlistMutation,
+    useDeleteProductFromWishlistMutation,
+} from "~/features/wishlist/wishlistApiSlice"
 
 const CardProduct = (props) => {
     const { id, name, price, stockQuantity, imageUrl } = props
+    const userState = useSelector(selectCurrentUser)
+    const [addProductToWishlist] =
+        useAddProductToWishlistMutation()
+    const [deleteProductFromWishlist] = useDeleteProductFromWishlistMutation()
     const [click, setClick] = useState(false)
     const navigate = useNavigate()
     const oldPrice = price + 9999
     const percent = Math.floor(100 * (1 - price / oldPrice))
+    const isWishList = stockQuantity === undefined
+    const handleClick = async () => {
+        setClick(!click)
+        if (!click && userState) {
+            try {
+                await addProductToWishlist({ id })
+            } catch (error) {
+                console.error(error)
+            }
+        } else {
+            try {
+                await deleteProductFromWishlist({ id })
+            } catch (error) {
+                console.error(error)
+            }
+        }
+    }
+
     return (
         <section className="product-item p-[10px] cursor-pointer flex flex-col relative border-[2px] border-[#F5F5F5] rounded-lg shadow-sm">
             <div
@@ -51,20 +79,24 @@ const CardProduct = (props) => {
                                 edit={false}
                                 color2={"#FFAD33"}
                             />
-                            <span className="flex text-sm font-semibold font-[Poppins] text-black opacity-50 pt-[2px]">
-                                {`(${stockQuantity})`}
-                            </span>
+                            {!isWishList && (
+                                <span className="flex text-sm font-semibold font-[Poppins] text-black opacity-50 pt-[2px]">
+                                    {`(${stockQuantity})`}
+                                </span>
+                            )}
                         </div>
 
-                        <div className="w-[30px] h-[30px] -mt-2 bg-transparent">
-                            <FiHeart
-                                className="heart"
-                                size={20}
-                                color="red"
-                                fill={`${click ? "red" : "none"}`}
-                                onClick={() => setClick(!click)}
-                            />
-                        </div>
+                        {!isWishList && (
+                            <div className="w-[30px] h-[30px] -mt-2 bg-transparent">
+                                <FiHeart
+                                    className="heart"
+                                    size={20}
+                                    color="red"
+                                    fill={`${click ? "red" : "none"}`}
+                                    onClick={() => handleClick()}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
