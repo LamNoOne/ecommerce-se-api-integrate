@@ -1,5 +1,5 @@
 import { Advertisement, Category, PageButton } from "~/components"
-import { advertisement, category } from "~/components/variables"
+import { advertisement } from "~/components/variables"
 import style from "~/style"
 import { GrPowerReset } from "react-icons/gr"
 import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa"
@@ -80,7 +80,7 @@ const Products = () => {
             <section>
                 <div className="top-home flex pt-10">
                     <div className="flex-1 category-menu">
-                        <Category category={category} />
+                        <Category />
                     </div>
                     <div className={`ms-[56px] ${style.advertisememtStyle}`}>
                         <Advertisement advertisement={advertisement} />
