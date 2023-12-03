@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react"
 import { SearchIcon } from "../icon"
 import { useNavigate } from "react-router-dom"
 import { useSearchProductQuery } from "~/features/products/productApiSlice"
-import { Loader, LoaderSearch } from ".."
+import LoaderSearch from "../loaderSearch"
 
 const Search = () => {
     const [value, setValue] = useState("")
