@@ -47,7 +47,6 @@ export default function PopupComponent ({ children }) {
                         <button
                             className="flex justify-center items-center min-w-[120px] h-[28px] text-xl border-[2px] rounded px-5 py-5 bg-[#e7e7e7]"
                             onClick={() => {
-                                console.log("modal closed ")
                                 close()
                             }}
                         >

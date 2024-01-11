@@ -68,7 +68,6 @@ const SignUpForm = () => {
             validationSchema={signUpSchema}
             onSubmit={async (values) => {
                 delete values.passwordConfirmation
-                console.log(values)
                 if(!isLoading) {
                     try {
                         await signup(values)

@@ -28,7 +28,7 @@ const LoginForm = () => {
             localStorage.setItem("user", JSON.stringify(userData.metadata.user))
             navigate("/")
         } catch (err) {
-            console.log(err)
+            console.error(err)
         }
     }
 

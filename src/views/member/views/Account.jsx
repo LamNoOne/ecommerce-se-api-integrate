@@ -44,7 +44,6 @@ const Account = () => {
     }
 
     const handleSubmitUpdate = async () => {
-        // console.log(firstName, lastName, address, selectedFile)
         try {
             await updateUserInfo({
                 firstName,
