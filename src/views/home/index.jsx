@@ -18,7 +18,7 @@ import {
 import {
     advertisement,
     // category,
-    // categoryBrowse 
+    categoryBrowse 
 } from "~/components/variables"
 
 const Home = () => {
@@ -45,7 +45,7 @@ const Home = () => {
                     numberOfCard={5}
                 />
             </section>
-            {/* <section>
+            <section>
                 <CategorySlide
                     CategoryModule={CategoryButton}
                     // Line={Line}
@@ -54,7 +54,7 @@ const Home = () => {
                     titleEvent="Browse By Category"
                     numberOfCard={6}
                 />
-            </section> */}
+            </section>
             <section>
                 <CategoryList
                     titleCategory="This Month"

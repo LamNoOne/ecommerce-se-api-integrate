@@ -9,7 +9,7 @@ const MemberInfo = (userInfo) => {
         <div className="payment-box-container shadow-md border rounded-lg px-4 py-5">
             <div className="payment-header flex items-center justify-start gap-4 mb-4">
                 <div className="w-[35px] h-[35px]">
-                    <img src={images.presentor} className="object-contain" />
+                    <img src={images.presentor} className="object-contain" alt="member" />
                 </div>
                 <h3 className="text-lg font-medium">Member Information</h3>
             </div>

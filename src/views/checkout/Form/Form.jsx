@@ -4,6 +4,7 @@ import InputForm from "./InputForm"
 import classNames from "classnames/bind"
 import ProductFormInfo from "./ProductFormInfo"
 import { Line, Button } from "~/components"
+import style from '~/style'
 import images from "~/assets/images"
 import styles from "./Form.module.scss"
 import { useNavigate } from "react-router-dom"
@@ -147,7 +148,7 @@ const CheckOutForm = (singlePurchasedProduct) => {
                 }}
             >
                 {(formik) => {
-                    const { errors, touched, isValid, dirty, values } = formik
+                    const { errors, touched, isValid, dirty } = formik
                     return (
                         <div className={cx("container")}>
                             <Form>
@@ -184,7 +185,7 @@ const CheckOutForm = (singlePurchasedProduct) => {
                                                 </p>
                                             </div>
                                             <div className="w-full my-4">
-                                                <Line style="w-full h-[1px] bg-black opacity-[0.4]" />
+                                                <Line style={style.lineStyleForm} />
                                             </div>
                                             <div className="flex items-center justify-between">
                                                 <h3 className="shippinh">
@@ -193,7 +194,7 @@ const CheckOutForm = (singlePurchasedProduct) => {
                                                 <p className="">Free</p>
                                             </div>
                                             <div className="w-full my-4">
-                                                <Line style="w-full h-[1px] bg-black opacity-[0.4]" />
+                                                <Line style={style.lineStyleForm} />
                                             </div>
                                             <div className="flex items-center justify-between">
                                                 <h3 className="shippinh">
@@ -226,18 +227,22 @@ const CheckOutForm = (singlePurchasedProduct) => {
                                                         <img
                                                             className="w-[42px] h-[28px] object-contain"
                                                             src={images.pay_1}
+                                                            alt="pay_1"
                                                         />
                                                         <img
                                                             className="w-[42px] h-[28px] object-contain"
                                                             src={images.pay_2}
+                                                            alt="pay_2"
                                                         />
                                                         <img
                                                             className="w-[42px] h-[28px] object-contain"
                                                             src={images.pay_3}
+                                                            alt="pay_3"
                                                         />
                                                         <img
                                                             className="w-[42px] h-[28px] object-contain"
                                                             src={images.pay_4}
+                                                            alt="pay_4"
                                                         />
                                                     </div>
                                                 </label>

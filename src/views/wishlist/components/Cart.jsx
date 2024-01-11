@@ -1,5 +1,4 @@
-import { Button, WishlistProduct } from "~/components"
-import CategoryRectangle from "~/components/icon/CategoryRectangle"
+import { WishlistProduct } from "~/components"
 
 const Cart = (props) => {
     const { items } = props

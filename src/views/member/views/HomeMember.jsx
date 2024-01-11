@@ -31,6 +31,7 @@ const HomeMember = () => {
                         <div className="w-[70px] h-[70px] rounded-full border border-[#ccc]">
                             <img
                                 className="object-contain"
+                                alt="smember"
                                 src="https://cellphones.com.vn/smember/_nuxt/img/Shipper_CPS3.77d4065.png"
                             />
                         </div>
@@ -62,7 +63,7 @@ const HomeMember = () => {
                 <div className="grid grid-cols-3 gap-6 mt-6">
                     <div className="flex flex-col items-center justify-center gap-6 p-4 border bg-[#fef5f0]">
                         <div className="flex flex-col items-center justify-center w-[86px] h-[86px] rounded-full">
-                            <img src={images.gift_cellphone} />
+                            <img src={images.gift_cellphone} alt="gift" />
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             <h1 className="text-base">Your Offer</h1>
@@ -78,7 +79,7 @@ const HomeMember = () => {
                     </div>
                     <div className="flex flex-col items-center justify-center gap-6 p-4 border bg-[#edf1fd]">
                         <div className="flex items-center justify-center w-[86px] h-[86px] rounded-full bg-[#fff7ca]">
-                            <img src={images.shipper_cellphone} />
+                            <img src={images.shipper_cellphone} alt="ship" />
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             <h1 className="text-base">Your Orders</h1>
@@ -94,7 +95,7 @@ const HomeMember = () => {
                     </div>
                     <div className="flex flex-col items-center justify-center gap-6 p-4 border bg-[#f1f8fe]">
                         <div className="flex items-center justify-center w-[86px] h-[86px] rounded-full bg-[#89c1f5]">
-                            <img src={images.rank_cellphone} />
+                            <img src={images.rank_cellphone} alt="rank_cellphone" />
                         </div>
                         <div className="flex flex-col items-center justify-center">
                             <div className="flex flex-row items-center">

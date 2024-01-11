@@ -4,10 +4,6 @@ import { useState } from "react"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(" ")
-}
-
 export default function CalendarDropDown() {
     const [date, setDate] = useState(new Date())
     return (

@@ -60,7 +60,7 @@ const Order = () => {
             <div className="flex flex-col gap-4 ms-6 w-full">
                 <div className="customer-info flex items-center gap-4 h-[100px]">
                     <div className="w-[70px] h-[70px] rounded-full bg-[#f4f6f8]">
-                        <img src={images.presentor} />
+                        <img src={images.presentor} alt="presentor" />
                     </div>
                     <div className="flex flex-col items-start gap-2">
                         <h1 className="name text-lg font-medium">

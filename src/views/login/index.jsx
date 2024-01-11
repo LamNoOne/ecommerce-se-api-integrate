@@ -9,6 +9,7 @@ const Login = () => {
                     <img
                         className="w-[805px] object-contain"
                         src={images.shop_auth}
+                        alt="shop-auth"
                     />
                 </div>
                 <div className="me-[135px] min-w-[371px]">

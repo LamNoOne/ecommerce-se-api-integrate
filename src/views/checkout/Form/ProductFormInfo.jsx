@@ -15,6 +15,7 @@ const ProductFormInfo = ({ carts }) => {
                             <img
                                 className="w-[54px] h-[54px] p-1 object-contain"
                                 src={cart?.product?.imageUrl}
+                                alt="product"
                             />
                             <h3 className="text-base">{cart?.product?.name}</h3>
                         </div>
@@ -45,6 +46,7 @@ const ProductFormInfo = ({ carts }) => {
                     <img
                         className="w-[54px] h-[54px] p-1 object-contain"
                         src={carts?.imageUrl}
+                        alt="product"
                     />
                     <h3 className="text-base">{carts?.name}</h3>
                 </div>

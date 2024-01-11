@@ -114,6 +114,7 @@ const ProductInfo = (props) => {
                                     <img
                                         className="w-[30px] h-[30px] object-contain"
                                         src={imageUrl}
+                                        alt="product-info"
                                     />
                                 </div>
                                 <div className="flex flex-col items-start justify-center">

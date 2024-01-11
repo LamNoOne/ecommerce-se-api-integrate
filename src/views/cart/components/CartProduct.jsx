@@ -44,6 +44,7 @@ const CartProduct = (props) => {
                 <img
                     className="ms-6 w-[54px] h-[54px] object-contain"
                     src={imageUrl}
+                    alt="card-product"
                 />
                 <h5 className="name">{name}</h5>
             </div>

@@ -10,7 +10,7 @@ const OrderedProductDetail = (props) => {
         <div className="border rounded-lg shadow-md px-4 pt-4 pb-2">
             <div className="flex flex-row items-center">
                 <div className="w-[110px] h-[110px] object-contain">
-                    <img src={imageUrl} />
+                    <img src={imageUrl} alt="order" />
                 </div>
                 <div className="order-short-info flex flex-col gap-2 items-start ps-4 w-full">
                     <h2

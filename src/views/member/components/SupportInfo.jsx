@@ -1,6 +1,5 @@
 import React from "react"
 import images from "~/assets/images"
-import { CiUser } from "react-icons/ci"
 import { BsTelephone } from "react-icons/bs"
 import { CiLocationOn } from "react-icons/ci"
 
@@ -9,7 +8,7 @@ const SupportInfo = () => {
         <div className="payment-box-container shadow-md border rounded-lg px-4 py-5">
             <div className="payment-header flex items-center justify-start gap-4 mb-4">
                 <div className="w-[35px] h-[35px]">
-                    <img src={images.presentor} className="object-contain" />
+                    <img src={images.presentor} className="object-contain" alt="support" />
                 </div>
                 <h3 className="text-lg font-medium">Support Information</h3>
             </div>

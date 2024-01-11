@@ -3,7 +3,7 @@ import Popup from "reactjs-popup"
 import { useNavigate } from "react-router-dom"
 import { useLogoutMutation } from "~/features/auth/authApiSlice"
 
-export default ({ children }) => {
+export default function PopupComponent ({ children }) {
     const [logout, { isLoading }] = useLogoutMutation()
     const navigate = useNavigate()
     const handleLogout = async () => {

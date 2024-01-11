@@ -1,4 +1,4 @@
-import { Advertisement, Category, PageButton, CardProduct } from "~/components"
+import { Advertisement, Category, PageButton } from "~/components"
 import { advertisement } from "~/components/variables"
 import style from "~/style"
 import { GrPowerReset } from "react-icons/gr"

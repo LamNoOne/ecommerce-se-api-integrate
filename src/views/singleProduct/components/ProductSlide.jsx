@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useState } from "react"
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react"
 // Import Swiper styles
@@ -30,27 +30,27 @@ export default function ProductSlide({ image }) {
             >
                 <SwiperSlide>
                     <div className="flex items-center justify-center h-[600px] shadow-sm border rounded-md">
-                        <img src={image} />
+                        <img alt="product-slide" src={image} />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="flex items-center justify-center h-[600px] shadow-sm border rounded-md">
-                        <img src={image} />
+                        <img alt="product-slide" src={image} />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="flex items-center justify-center h-[600px] shadow-sm border rounded-md">
-                        <img src={image} />
+                        <img alt="product-slide" src={image} />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="flex items-center justify-center h-[600px] shadow-sm border rounded-md">
-                        <img src={image} />
+                        <img alt="product-slide" src={image} />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="flex items-center justify-center h-[600px] shadow-sm border rounded-md">
-                        <img src={image} />
+                        <img alt="product-slide" src={image} />
                     </div>
                 </SwiperSlide>
             </Swiper>
@@ -68,27 +68,27 @@ export default function ProductSlide({ image }) {
             >
                 <SwiperSlide>
                     <div className="h-[80px] p-1 shadow-sm border-[2px] overflow-hidden rounded-md flex items-center">
-                        <img src={image} className="object-contain"/>
+                        <img alt="product-slide" src={image} className="object-contain"/>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="h-[80px] p-1 shadow-sm border-[2px] overflow-hidden rounded-md flex items-center">
-                        <img src={image} className="object-contain"/>
+                        <img alt="product-slide" src={image} className="object-contain"/>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="h-[80px] p-1 shadow-sm border-[2px] overflow-hidden rounded-md flex items-center">
-                        <img src={image} className="object-contain"/>
+                        <img alt="product-slide" src={image} className="object-contain"/>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="h-[80px] p-1 shadow-sm border-[2px] overflow-hidden rounded-md flex items-center">
-                        <img src={image} className="object-contain"/>
+                        <img alt="product-slide" src={image} className="object-contain"/>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className="h-[80px] p-1 shadow-sm border-[2px] overflow-hidden rounded-md flex items-center">
-                        <img src={image} className="object-contain"/>
+                        <img alt="product-slide" src={image} className="object-contain"/>
                     </div>
                 </SwiperSlide>
             </Swiper>

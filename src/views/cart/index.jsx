@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import CartProduct from "./components/CartProduct"
 import { Button } from "~/components"
 import { useNavigate } from "react-router-dom"
