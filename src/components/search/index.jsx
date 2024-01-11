@@ -1,40 +1,40 @@
-import React, { useState, useRef } from "react"
-import { SearchIcon } from "../icon"
-import { useNavigate } from "react-router-dom"
-import { useSearchProductQuery } from "~/features/products/productApiSlice"
-import LoaderSearch from "../loaderSearch"
+import React, { useState, useRef } from "react";
+import { SearchIcon } from "../icon";
+import { useNavigate } from "react-router-dom";
+import { useSearchProductQuery } from "~/features/products/productApiSlice";
+import LoaderSearch from "../loaderSearch";
 
 const Search = () => {
-    const [value, setValue] = useState("")
-    const ref = useRef(null)
-    const navigate = useNavigate()
-    const [isOpen, setIsOpen] = useState(false)
+    const [value, setValue] = useState("");
+    const ref = useRef(null);
+    const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
 
-    const { data, isFetching, isSuccess } = useSearchProductQuery({
+    const { data, isFetching, isSuccess, isError } = useSearchProductQuery({
         name: value,
         limit: 10,
-    })
+    }, { skip: !isOpen || value === "" });
     const handleClickSearch = (e, id) => {
-        e.preventDefault()
-        navigate(`/product/${id}`)
-    }
+        e.preventDefault();
+        navigate(`/product/${id}`);
+    };
     const handleSearchSubmit = (e) => {
-        e.preventDefault()
-        navigate(`/product-search?search=${value}`, { state: { value } })
-    }
+        e.preventDefault();
+        navigate(`/product-search?search=${value}`, { state: { value } });
+    };
     const handleOnChange = (e) => {
-        setValue(e.target.value)
-        setIsOpen(true)
-    }
+        setValue(e.target.value);
+        setIsOpen(true);
+    };
     const toggle = () => {
-        setTimeout(() => setIsOpen(!isOpen), 100)
-    }
+        setTimeout(() => setIsOpen(!isOpen), 100);
+    };
 
-    let content
+    let content;
     if (isFetching) {
-        content = <></>
+        content = <></>;
     } else if (isSuccess) {
-        const searchData = data?.metadata?.products
+        const searchData = data?.metadata?.products;
         content = (
             <>
                 {isOpen && (
@@ -52,6 +52,7 @@ const Search = () => {
                                     <img
                                         src={item.imageUrl}
                                         className="w-[40px] h-[40px] object-contain"
+                                        alt="item"
                                     />
                                 </div>
                             ))}
@@ -59,7 +60,9 @@ const Search = () => {
                     </div>
                 )}
             </>
-        )
+        );
+    } else if(isError) {
+        content = <p>Waiting...</p> 
     }
     return (
         <div className="relative">
@@ -85,7 +88,7 @@ const Search = () => {
             </form>
             {content}
         </div>
-    )
-}
+    );
+};
 
-export default Search
+export default Search;

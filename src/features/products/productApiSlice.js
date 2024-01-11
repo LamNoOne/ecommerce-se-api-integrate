@@ -1,17 +1,17 @@
-import { apiSlice } from "../../app/api/apiSlice"
+import { apiSlice } from "../../app/api/apiSlice";
 
 export const productsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getAllProduct: builder.query({
             query: (params) => {
-                let queryString
-                const { page = 1, order, limit = 100 } = params
+                let queryString;
+                const { page = 1, order, limit = 100 } = params;
                 if (!order) {
-                    queryString = `/api/products?_page=${page}&_limit=${limit}`
+                    queryString = `/api/products?_page=${page}&_limit=${limit}`;
                 } else {
-                    queryString = `/api/products?_page=${page}&_limit=${limit}&_order=${order}&_sortBy=price`
+                    queryString = `/api/products?_page=${page}&_limit=${limit}&_order=${order}&_sortBy=price`;
                 }
-                return queryString
+                return queryString;
             },
         }),
         getProductById: builder.query({
@@ -22,22 +22,28 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         }),
         searchProduct: builder.query({
             query: (params) => {
-                const { page = 1, name, order, limit = 100, sortBy = "price" } = params
-                let queryString
+                const {
+                    page = 1,
+                    name,
+                    order,
+                    limit = 100,
+                    sortBy = "price",
+                } = params;
+                let queryString;
                 if (!order && name) {
-                    queryString = `/api/products?name=${name}&_page=${page}&_limit=${limit}`
-                } else if(order && name) {
-                    queryString = `/api/products?name=${name}&_page=${page}&_limit=${limit}&_order=${order}&_sortBy=${sortBy}`
+                    queryString = `/api/products?name=${name}&_page=${page}&_limit=${limit}`;
+                } else if (order && name) {
+                    queryString = `/api/products?name=${name}&_page=${page}&_limit=${limit}&_order=${order}&_sortBy=${sortBy}`;
                 }
-                return queryString
+                return queryString;
             },
         }),
     }),
-})
+});
 
 export const {
     useGetAllProductQuery,
     useGetProductByIdQuery,
     useGetLimitProductQuery,
-    useSearchProductQuery
-} = productsApiSlice
+    useSearchProductQuery,
+} = productsApiSlice;
