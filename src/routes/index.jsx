@@ -10,15 +10,9 @@ import {
     Cart,
     SingleProduct,
     CheckOut,
-    SmartPhone,
     HomeMember,
-    Tivi,
-    Camera,
-    Laptop,
-    Studio,
-    Products,
-    PC,
-    Accessories,
+    Product,
+    AllProducts,
     Order,
     SingleOrder,
     Warranty,
@@ -43,7 +37,7 @@ export default function Router() {
                         </Loader>
                     ),
                 },
-                { path: "/product", element: <Products /> },
+                { path: "/product", element: <AllProducts /> },
                 {
                     path: "/product-search",
                     element: (
@@ -52,13 +46,13 @@ export default function Router() {
                         </Loader>
                     ),
                 },
-                { path: "/laptop", element: <Laptop /> },
-                { path: "/studio", element: <Studio /> },
-                { path: "/smartphone", element: <SmartPhone /> },
-                { path: "/camera", element: <Camera /> },
-                { path: "/accessory", element: <Accessories /> },
-                { path: "/pc", element: <PC /> },
-                { path: "/tv", element: <Tivi /> },
+                { path: "/laptop", element: <Product /> },
+                { path: "/studio", element: <Product /> },
+                { path: "/smartphone", element: <Product /> },
+                { path: "/camera", element: <Product /> },
+                { path: "/accessory", element: <Product /> },
+                { path: "/pc", element: <Product /> },
+                { path: "/tv", element: <Product /> },
                 {
                     path: "/member",
                     element: (

@@ -5,11 +5,9 @@ import { GrPowerReset } from "react-icons/gr"
 import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa"
 import { Product } from "~/components"
 import { useState } from "react"
-import { useLocation } from "react-router-dom"
-import { useGetAllProductsByCategoryQuery } from "~/features/category/categoryApiSlide"
+import { useGetAllProductQuery } from "~/features/products/productApiSlice"
 
-const SmartPhone = () => {
-    const location = useLocation()
+const AllProducts = () => {
     const [page, setPage] = useState(1)
     const [sortActive, setSortActive] = useState(null)
 
@@ -19,8 +17,7 @@ const SmartPhone = () => {
         isSuccess,
         isError,
         error,
-    } = useGetAllProductsByCategoryQuery({
-        type: location.state?.categoryId,
+    } = useGetAllProductQuery({
         page,
         order: sortActive,
     })
@@ -29,7 +26,7 @@ const SmartPhone = () => {
     if (isLoading) {
         content = <p>Loading...</p>
     } else if (isSuccess) {
-        content = <Product products={products?.metadata?.products?.products} />
+        content = <Product products={products?.metadata?.products} />
     } else if (isError) {
         content = <p>{error}</p>
     }
@@ -127,4 +124,4 @@ const SmartPhone = () => {
     )
 }
 
-export default SmartPhone
+export default AllProducts

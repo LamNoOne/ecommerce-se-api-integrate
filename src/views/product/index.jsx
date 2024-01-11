@@ -5,9 +5,11 @@ import { GrPowerReset } from "react-icons/gr"
 import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa"
 import { Product } from "~/components"
 import { useState } from "react"
-import { useGetAllProductQuery } from "~/features/products/productApiSlice"
+import { useLocation } from "react-router-dom"
+import { useGetAllProductsByCategoryQuery } from "~/features/category/categoryApiSlide"
 
-const Products = () => {
+const ProductCategory = () => {
+    const location = useLocation()
     const [page, setPage] = useState(1)
     const [sortActive, setSortActive] = useState(null)
 
@@ -17,7 +19,8 @@ const Products = () => {
         isSuccess,
         isError,
         error,
-    } = useGetAllProductQuery({
+    } = useGetAllProductsByCategoryQuery({
+        type: location.state?.categoryId,
         page,
         order: sortActive,
     })
@@ -26,7 +29,7 @@ const Products = () => {
     if (isLoading) {
         content = <p>Loading...</p>
     } else if (isSuccess) {
-        content = <Product products={products?.metadata?.products} />
+        content = <Product products={products?.metadata?.products?.products} />
     } else if (isError) {
         content = <p>{error}</p>
     }
@@ -124,4 +127,4 @@ const Products = () => {
     )
 }
 
-export default Products
+export default ProductCategory

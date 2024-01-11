@@ -68,7 +68,7 @@ const Search = () => {
         <div className="relative">
             <form
                 onSubmit={(e) => handleSearchSubmit(e)}
-                className="search-form-header h-[100%] w-[243px] flex ps-5 pe-3 py-[7px] justify-center items-center rounded gap-2"
+                className="search-form-header h-[100%] flex ps-5 pe-3 py-[7px] justify-center items-center rounded gap-2"
                 action=""
             >
                 <input
@@ -80,9 +80,9 @@ const Search = () => {
                     onChange={handleOnChange}
                     onClick={toggle}
                     onBlur={toggle}
-                    className="flex-1 h-[100%] bg-transparent focus:outline-none text-xs"
+                    className="flex-1 h-[100%] bg-transparent focus:outline-none text-xs pr-2"
                 />
-                <button type="submit" className="flex items-center">
+                <button type="submit" className="flex items-center p-1">
                     <SearchIcon />
                 </button>
             </form>

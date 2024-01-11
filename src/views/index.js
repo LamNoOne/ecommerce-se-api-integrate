@@ -5,14 +5,8 @@ import WishList from "./wishlist"
 import Cart from "./cart"
 import SingleProduct from "./singleProduct"
 import CheckOut from "./checkout"
-import SmartPhone from "./smartphone"
-import Laptop from "./laptop"
-import Studio from "./studio"
-import Camera from "./camera"
-import Accessories from "./accessories"
-import PC from "./pc"
-import Tivi from "./tivi"
-import Products from "./product"
+import Product from "./product"
+import AllProducts from "./allProduct"
 import ProductSearch from "./productSearch"
 import {
     HomeMember,
@@ -34,14 +28,8 @@ export {
     Cart,
     SingleProduct,
     CheckOut,
-    SmartPhone,
-    Laptop,
-    Studio,
-    Camera,
-    Accessories,
-    PC,
-    Tivi,
-    Products,
+    Product,
+    AllProducts,
     HomeMember,
     Order,
     SingleOrder,
