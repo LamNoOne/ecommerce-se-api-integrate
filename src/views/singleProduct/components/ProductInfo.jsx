@@ -1,20 +1,20 @@
-import React from "react"
-import ReactStars from "react-stars"
-import style from "~/style/index"
-import { useState } from "react"
-import { Line, Button } from "~/components"
-import { Delivery, Return } from "~/components/icon"
-import { PiShoppingCartBold } from "react-icons/pi"
-import { useNavigate } from "react-router-dom"
-import { useAddCartMutation } from "~/features/cart/cartApiSlice"
+import React from "react";
+import ReactStars from "react-stars";
+import style from "~/style/index";
+import { useState } from "react";
+import { Line, Button } from "~/components";
+import { Delivery, Return } from "~/components/icon";
+import { PiShoppingCartBold } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
+import { useAddCartMutation } from "~/features/cart/cartApiSlice";
 
 const ProductInfo = (props) => {
-    const navigate = useNavigate()
-    const [addCart, { isLoading }] = useAddCartMutation()
+    const navigate = useNavigate();
+    const [addCart, { isLoading }] = useAddCartMutation();
 
-    const [quantity, setQuantity] = useState(1)
-    const [sizeType, setSizeType] = useState("")
-    const [type, setType] = useState("")
+    const [quantity, setQuantity] = useState(1);
+    const [sizeType, setSizeType] = useState("");
+    const [type, setType] = useState("");
 
     const {
         id: productId,
@@ -23,33 +23,35 @@ const ProductInfo = (props) => {
         price,
         description,
         stockQuantity,
-    } = props?.metadata?.product
+    } = props?.metadata?.product;
 
-    const handleQuantityOnChange = (value) => setQuantity(value)
-    const increment = () => setQuantity((a) => a + 1)
+    const handleQuantityOnChange = (value) => setQuantity(value);
+    const increment = () => setQuantity((a) => a + 1);
     const decrement = () => {
         if (quantity !== 0) {
-            setQuantity((a) => a - 1)
+            setQuantity((a) => a - 1);
         }
-    }
+    };
 
     const addToCartHandler = async () => {
         if (!isLoading) {
             try {
-                await addCart({ productId, quantity })
+                await addCart({ productId, quantity });
                 // anounce the status using toast message
             } catch (error) {
-                console.error(error)
+                console.error(error);
             }
         }
-    }
+    };
 
     const buyProductHandler = () => {
-        navigate("/user/checkout", { state: { productId, quantity, name, imageUrl, price } })
-    }
+        navigate("/user/checkout", {
+            state: { productId, quantity, name, imageUrl, price },
+        });
+    };
     // Neu color khac thi gia co khac khong
-    const colors = ["White", "Black"]
-    const sizes = ["XS", "S", "M", "L", "XL"]
+    const colors = ["White", "Black"];
+    const sizes = ["XS", "S", "M", "L", "XL"];
     return (
         <div className="product-info-container">
             <div className="product-info">
@@ -108,8 +110,7 @@ const ProductInfo = (props) => {
                                         : "border-[#ccc]"
                                 }`}
                                 key={color}
-                                onClick={() => setType(color)}
-                            >
+                                onClick={() => setType(color)}>
                                 <div className="flex items-center">
                                     <img
                                         className="w-[30px] h-[30px] object-contain"
@@ -144,8 +145,7 @@ const ProductInfo = (props) => {
                                     sizeType === size
                                         ? "border-[#db44444] bg-[#db4444]"
                                         : "border-[rgba(0,0,0,0.5)"
-                                }`}
-                            >
+                                }`}>
                                 {size}
                             </button>
                         ))}
@@ -156,8 +156,7 @@ const ProductInfo = (props) => {
                 <div className="quantity-btn flex h-11">
                     <button
                         className="hover:bg-[#db4444] hover:border-[#db44444] flex items-center justify-center border-y-2 border-l-2 border-[#ccc] rounded-l w-[40px] px-2 py-[10px]"
-                        onClick={() => decrement()}
-                    >
+                        onClick={() => decrement()}>
                         <span className="text-xl">-</span>
                     </button>
                     <div className="">
@@ -174,8 +173,7 @@ const ProductInfo = (props) => {
                     </div>
                     <button
                         className="hover:bg-[#db4444] hover:border-[#db44444] flex items-center justify-center border-y-2 border-r-2 border-[#ccc] rounded-r w-[40px] px-2 py-[10px]"
-                        onClick={() => increment()}
-                    >
+                        onClick={() => increment()}>
                         <span className="text-xl">+</span>
                     </button>
                 </div>
@@ -183,8 +181,7 @@ const ProductInfo = (props) => {
                     primary
                     medium
                     type="submit"
-                    onClick={() => buyProductHandler()}
-                >
+                    onClick={() => buyProductHandler()}>
                     Buy Now
                 </Button>
                 <Button onClick={() => addToCartHandler()}>
@@ -222,7 +219,7 @@ const ProductInfo = (props) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ProductInfo
+export default ProductInfo;

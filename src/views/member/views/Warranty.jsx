@@ -1,10 +1,10 @@
-import React from "react"
-import SideBar from "../components/SideBar"
-import { useState } from "react"
+import React from "react";
+import SideBar from "../components/SideBar";
+import { useState } from "react";
 
 const Warranty = () => {
     // useSelector to get the state => display Warrantyed items
-    const [active, setActive] = useState("")
+    const [active, setActive] = useState("");
     const filterWarranty = {
         getAll: "All Warranty",
         accepted: "Accepted Product",
@@ -12,13 +12,13 @@ const Warranty = () => {
         fixing: "Fixing",
         done: "Done",
         returned: "Returned",
-    }
+    };
 
     const handleOnClickFilter = (key, title) => {
         // set active,
         // dispatch action to get new state
-        setActive(title)
-    }
+        setActive(title);
+    };
 
     return (
         <section className="my-4 flex">
@@ -34,13 +34,11 @@ const Warranty = () => {
                             className={`flex items-center justify-center px-4 py-2 border rounded ${
                                 active === title ? "bg-[#ff0000]" : ""
                             }`}
-                            onClick={() => handleOnClickFilter(key, title)}
-                        >
+                            onClick={() => handleOnClickFilter(key, title)}>
                             <span
                                 className={`text-base ${
                                     active === title ? "text-white" : ""
-                                }`}
-                            >
+                                }`}>
                                 {title}
                             </span>
                         </button>
@@ -59,7 +57,7 @@ const Warranty = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Warranty
+export default Warranty;

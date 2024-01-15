@@ -1,11 +1,11 @@
-import { Menu, Transition } from "@headlessui/react"
-import { Fragment } from "react"
-import { useState } from "react"
-import Calendar from "react-calendar"
-import "react-calendar/dist/Calendar.css"
+import { Menu, Transition } from "@headlessui/react";
+import { Fragment } from "react";
+import { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 export default function CalendarDropDown() {
-    const [date, setDate] = useState(new Date())
+    const [date, setDate] = useState(new Date());
     return (
         <Menu as="div" className="relative text-left flex justify-end">
             <div>
@@ -34,15 +34,13 @@ export default function CalendarDropDown() {
                 enterTo="transform opacity-100 scale-100"
                 leave="transition ease-in duration-75"
                 leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-            >
+                leaveTo="transform opacity-0 scale-95">
                 <Menu.Items className="absolute w-[288px] right-0 z-10 mt-12 origin-top-right rounded-md bg-[rgba(0,0,0,0.4)] backdrop-filter backdrop-blur-[75px] shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                         {({ active }) => (
                             <div
                                 onClick={(e) => e.preventDefault()}
-                                className="calendar w-full overflow-hidden"
-                            >
+                                className="calendar w-full overflow-hidden">
                                 <div className="calendar-container w-full">
                                     <Calendar
                                         onChange={setDate}
@@ -56,5 +54,5 @@ export default function CalendarDropDown() {
                 </Menu.Items>
             </Transition>
         </Menu>
-    )
+    );
 }

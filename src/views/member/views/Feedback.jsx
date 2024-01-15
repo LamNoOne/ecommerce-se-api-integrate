@@ -1,8 +1,7 @@
-import React from "react"
-import SideBar from "../components/SideBar"
+import React from "react";
+import SideBar from "../components/SideBar";
 
 const Feedback = () => {
-
     return (
         <section className="my-4 flex">
             <div className="min-w-[260px]">
@@ -23,7 +22,7 @@ const Feedback = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Feedback
+export default Feedback;

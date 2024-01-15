@@ -1,4 +1,3 @@
-
 const CustomerServiceIcon = () => {
     return (
         <svg
@@ -6,8 +5,7 @@ const CustomerServiceIcon = () => {
             width="40"
             height="40"
             viewBox="0 0 40 40"
-            fill="none"
-        >
+            fill="none">
             <g clipPath="url(#clip0_803_352)">
                 <path
                     d="M13.3334 24.9998C13.3334 23.1589 11.841 21.6665 10 21.6665C8.15907 21.6665 6.66669 23.1589 6.66669 24.9998V28.3332C6.66669 30.1741 8.15907 31.6665 10 31.6665C11.841 31.6665 13.3334 30.1741 13.3334 28.3332V24.9998Z"
@@ -44,7 +42,7 @@ const CustomerServiceIcon = () => {
                 </clipPath>
             </defs>
         </svg>
-    )
-}
+    );
+};
 
-export default CustomerServiceIcon
+export default CustomerServiceIcon;

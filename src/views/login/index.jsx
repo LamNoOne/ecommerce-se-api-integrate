@@ -1,5 +1,5 @@
-import images from "~/assets/images"
-import LoginForm from "./Form/Form"
+import images from "~/assets/images";
+import LoginForm from "./Form/Form";
 
 const Login = () => {
     return (
@@ -17,7 +17,7 @@ const Login = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Login
+export default Login;

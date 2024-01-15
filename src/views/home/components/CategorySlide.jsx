@@ -1,13 +1,13 @@
-import { useRef } from "react"
-import "swiper/css"
-import "swiper/css/navigation"
-import "swiper/css/pagination"
-import { Navigation } from "swiper/modules"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { NavigationSlide } from "~/components"
-import { NextBtn, PrevBtn } from "~/components/icon"
-import CategoryRectangle from "~/components/icon/CategoryRectangle"
-import style from "~/style"
+import { useRef } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { NavigationSlide } from "~/components";
+import { NextBtn, PrevBtn } from "~/components/icon";
+import CategoryRectangle from "~/components/icon/CategoryRectangle";
+import style from "~/style";
 
 const CategorySlide = (props) => {
     const {
@@ -19,16 +19,16 @@ const CategorySlide = (props) => {
         titleCategory,
         titleEvent,
         numberOfCard,
-    } = props
+    } = props;
 
-    const refPrev = useRef()
-    const refNext = useRef()
+    const refPrev = useRef();
+    const refNext = useRef();
     const handleClickPrevBtn = () => {
-        refPrev.current.click()
-    }
+        refPrev.current.click();
+    };
     const handleClickNextBtn = () => {
-        refNext.current.click()
-    }
+        refNext.current.click();
+    };
 
     return (
         <div className="product-slide relative">
@@ -42,8 +42,7 @@ const CategorySlide = (props) => {
                     </div>
                     <div className="event flex items-end">
                         <h1
-                            className={`text-[32px] leading-[36px] font-semibold tracking-[1.44px] font-[Inter] text-black me-[87px]`}
-                        >
+                            className={`text-[32px] leading-[36px] font-semibold tracking-[1.44px] font-[Inter] text-black me-[87px]`}>
                             {titleEvent}
                         </h1>
                     </div>
@@ -55,14 +54,12 @@ const CategorySlide = (props) => {
                 <div className="swiper-nav-btns mb-10">
                     <button
                         className="swiper-btn hover:bg-[#00000033] hover:cursor-pointer swiper-btn-prev mr-2 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-none outline-none bg-[#f5f5f5] text-black shadow-md"
-                        onClick={handleClickPrevBtn}
-                    >
+                        onClick={handleClickPrevBtn}>
                         <PrevBtn />
                     </button>
                     <button
                         className="swiper-btn hover:bg-[#00000033] hover:cursor-pointer swiper-btn-next inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-none outline-none bg-[#f5f5f5] text-black shadow-md"
-                        onClick={handleClickNextBtn}
-                    >
+                        onClick={handleClickNextBtn}>
                         <NextBtn />
                     </button>
                 </div>
@@ -75,8 +72,7 @@ const CategorySlide = (props) => {
                 pagination={{
                     type: "fraction",
                 }}
-                modules={Navigation}
-            >
+                modules={Navigation}>
                 {Array.isArray(items) ? (
                     items.map((item) => (
                         <SwiperSlide key={item._id}>
@@ -99,7 +95,7 @@ const CategorySlide = (props) => {
             )}
             {Line && <Line style={style.lineStyleMain} />}
         </div>
-    )
-}
+    );
+};
 
-export default CategorySlide
+export default CategorySlide;

@@ -1,11 +1,11 @@
-import PropsType from 'prop-types'
+import PropsType from "prop-types";
 
 const Line = ({ style }) => {
-    return <div className={style} />
-}
+    return <div className={style} />;
+};
 
 Line.propTypes = {
-    style: PropsType.string.isRequired
-}
+    style: PropsType.string.isRequired,
+};
 
-export default Line
+export default Line;

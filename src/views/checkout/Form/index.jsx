@@ -1,2 +1,2 @@
-import Form from './Form'
-export default Form
+import Form from "./Form";
+export default Form;

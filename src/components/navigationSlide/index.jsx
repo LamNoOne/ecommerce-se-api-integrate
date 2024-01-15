@@ -1,2 +1,2 @@
-import NavigationSlide from "./NavigationSlide"
-export default NavigationSlide
+import NavigationSlide from "./NavigationSlide";
+export default NavigationSlide;

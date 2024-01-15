@@ -10,10 +10,13 @@ const Search = () => {
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
 
-    const { data, isFetching, isSuccess, isError } = useSearchProductQuery({
-        name: value,
-        limit: 10,
-    }, { skip: !isOpen || value === "" });
+    const { data, isFetching, isSuccess, isError } = useSearchProductQuery(
+        {
+            name: value,
+            limit: 10,
+        },
+        { skip: !isOpen || value === "" }
+    );
     const handleClickSearch = (e, id) => {
         e.preventDefault();
         navigate(`/product/${id}`);
@@ -46,8 +49,7 @@ const Search = () => {
                                     onClick={(e) =>
                                         handleClickSearch(e, item.id)
                                     }
-                                    className="drop-down-row cursor-pointer py-2 px-4 border-b flex items-center justify-between hover:bg-gray-200"
-                                >
+                                    className="drop-down-row cursor-pointer py-2 px-4 border-b flex items-center justify-between hover:bg-gray-200">
                                     <span>{item.name}</span>
                                     <img
                                         src={item.imageUrl}
@@ -61,16 +63,15 @@ const Search = () => {
                 )}
             </>
         );
-    } else if(isError) {
-        content = <p>Waiting...</p> 
+    } else if (isError) {
+        content = <p>Waiting...</p>;
     }
     return (
         <div className="relative">
             <form
                 onSubmit={(e) => handleSearchSubmit(e)}
                 className="search-form-header h-[100%] flex ps-5 pe-3 py-[7px] justify-center items-center rounded gap-2"
-                action=""
-            >
+                action="">
                 <input
                     type="text"
                     ref={ref}

@@ -1,4 +1,4 @@
-import style from "~/style"
+import style from "~/style";
 
 const Container = (props) => {
     return (
@@ -6,12 +6,11 @@ const Container = (props) => {
             <div
                 className={`${
                     !props.maxWidthNone ? style.boxWidth : ""
-                } mx-auto`}
-            >
+                } mx-auto`}>
                 {props.children}
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Container
+export default Container;

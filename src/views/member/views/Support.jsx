@@ -1,8 +1,7 @@
-import React from "react"
-import SideBar from "../components/SideBar"
+import React from "react";
+import SideBar from "../components/SideBar";
 
 const Gift = () => {
-
     return (
         <section className="my-4 flex">
             <div className="min-w-[260px]">
@@ -23,7 +22,7 @@ const Gift = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default Gift
+export default Gift;

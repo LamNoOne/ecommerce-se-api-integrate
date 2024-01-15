@@ -1,47 +1,49 @@
-import React, { useRef, useState } from "react"
-import SideBar from "../components/SideBar"
-import { useNavigate } from "react-router-dom"
-import { maskEmail, maskPhoneNumber } from "~/config/MaskSecure"
-import { Line } from "~/components"
-import style from "~/style"
-import { CiUser } from "react-icons/ci"
-import { useSelector } from "react-redux"
-import { selectCurrentUser } from "~/features/auth/authSlice"
-import { useUpdateUserInfoMutation } from "~/features/user/userApiSlice"
+import React, { useRef, useState } from "react";
+import SideBar from "../components/SideBar";
+import { useNavigate } from "react-router-dom";
+import { maskEmail, maskPhoneNumber } from "~/config/MaskSecure";
+import { Line } from "~/components";
+import style from "~/style";
+import { CiUser } from "react-icons/ci";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "~/features/auth/authSlice";
+import { useUpdateUserInfoMutation } from "~/features/user/userApiSlice";
 
 const Account = () => {
-    const userData = useSelector(selectCurrentUser)
-    const userDetail = userData?.metadata?.user
+    const userData = useSelector(selectCurrentUser);
+    const userDetail = userData?.metadata?.user;
 
-    const [updateUserInfo] = useUpdateUserInfoMutation()
+    const [updateUserInfo] = useUpdateUserInfoMutation();
 
-    const [firstName, setFirstName] = useState(`${userDetail?.firstName || ""}`)
-    const [lastName, setLastName] = useState(`${userDetail?.lastName || ""}`)
-    const [address, setAddress] = useState(`${userDetail?.address || ""}`)
-    const [selectedFile, setSelectedFile] = useState(null)
+    const [firstName, setFirstName] = useState(
+        `${userDetail?.firstName || ""}`
+    );
+    const [lastName, setLastName] = useState(`${userDetail?.lastName || ""}`);
+    const [address, setAddress] = useState(`${userDetail?.address || ""}`);
+    const [selectedFile, setSelectedFile] = useState(null);
 
-    const inputRef = useRef(null)
-    const navigate = useNavigate()
+    const inputRef = useRef(null);
+    const navigate = useNavigate();
     const onButtonClick = () => {
-        inputRef.current.click()
-    }
-    const canSave = Boolean(firstName) && Boolean(lastName) && Boolean(address)
+        inputRef.current.click();
+    };
+    const canSave = Boolean(firstName) && Boolean(lastName) && Boolean(address);
 
     const handleChangeFirstName = (e) => {
-        setFirstName(e.target.value)
-    }
+        setFirstName(e.target.value);
+    };
 
     const handleChangeLastName = (e) => {
-        setLastName(e.target.value)
-    }
+        setLastName(e.target.value);
+    };
 
     const handleChangeAddress = (e) => {
-        setAddress(e.target.value)
-    }
+        setAddress(e.target.value);
+    };
 
     const fileSelectedHandler = (e) => {
-        setSelectedFile(e.target.files[0])
-    }
+        setSelectedFile(e.target.files[0]);
+    };
 
     const handleSubmitUpdate = async () => {
         try {
@@ -50,13 +52,13 @@ const Account = () => {
                 lastName,
                 address,
                 image: selectedFile,
-            }).unwrap()
-            navigate('/')
-            window.location.reload()
+            }).unwrap();
+            navigate("/");
+            window.location.reload();
         } catch (error) {
-            console.error(error)
+            console.error(error);
         }
-    }
+    };
 
     return (
         <div className="my-4 flex">
@@ -115,8 +117,7 @@ const Account = () => {
                                     className="text-xs underline text-blue-700 cursor-pointer"
                                     onClick={() =>
                                         navigate("/member/verify/email")
-                                    }
-                                >
+                                    }>
                                     Change
                                 </span>
                             </div>
@@ -131,8 +132,7 @@ const Account = () => {
                                     className="text-xs underline text-blue-700 cursor-pointer"
                                     onClick={() =>
                                         navigate("/member/verify/phone")
-                                    }
-                                >
+                                    }>
                                     Change
                                 </span>
                             </div>
@@ -147,8 +147,7 @@ const Account = () => {
                         />
                         <button
                             className="px-4 py-2 border mt-2"
-                            onClick={onButtonClick}
-                        >
+                            onClick={onButtonClick}>
                             Pick file
                         </button>
                         <div className="w-[100px] h-[100px] flex justify-center items-center rounded-full overflow-hidden bg-gray-200">
@@ -168,14 +167,13 @@ const Account = () => {
                         type="submit"
                         disabled={!canSave}
                         className="px-4 py-2 border mt-2 bg-[#ff0000] rounded text-white hover:bg-orange-500 cursor-pointer disabled:bg-red-400 disabled:cursor-none"
-                        onClick={() => handleSubmitUpdate()}
-                    >
+                        onClick={() => handleSubmitUpdate()}>
                         Save
                     </button>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Account
+export default Account;

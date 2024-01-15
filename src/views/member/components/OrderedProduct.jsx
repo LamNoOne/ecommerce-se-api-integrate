@@ -1,17 +1,17 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
 const OrderedProduct = (props) => {
-    const { id, orderStatus, products } = props
-    const { name: nameStatus } = orderStatus
-    const numberProducts = products.length
-    const productImageUrl = products[0]?.product?.imageUrl
-    const productName = products[0].product?.name
+    const { id, orderStatus, products } = props;
+    const { name: nameStatus } = orderStatus;
+    const numberProducts = products.length;
+    const productImageUrl = products[0]?.product?.imageUrl;
+    const productName = products[0].product?.name;
     const totalPrice = Array.isArray(products)
         ? products.reduce(
               (acc, product) => acc + product?.quantity * product?.price,
               0
           )
-        : 0
+        : 0;
 
     return (
         <div className="border rounded-lg shadow-md px-4 pt-4 pb-2">
@@ -42,19 +42,17 @@ const OrderedProduct = (props) => {
             <div className="flex justify-end gap-4">
                 <Link
                     to={`${id}`}
-                    className="flex items-center justify-center rounded text-sm px-2 py-1 border border-[#ff0000] text-[#ff0000]"
-                >
+                    className="flex items-center justify-center rounded text-sm px-2 py-1 border border-[#ff0000] text-[#ff0000]">
                     Watch Bill
                 </Link>
                 <Link
                     to={`${id}`}
-                    className="flex items-center justify-center rounded text-sm px-2 py-1 border border-[#ff0000] text-[#ff0000]"
-                >
+                    className="flex items-center justify-center rounded text-sm px-2 py-1 border border-[#ff0000] text-[#ff0000]">
                     Go Detail
                 </Link>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default OrderedProduct
+export default OrderedProduct;

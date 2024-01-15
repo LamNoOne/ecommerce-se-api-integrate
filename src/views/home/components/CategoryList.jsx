@@ -1,9 +1,9 @@
-import { Button, CardProduct } from "~/components"
-import CategoryRectangle from "~/components/icon/CategoryRectangle"
-import { useGetLimitProductQuery } from "~/features/products/productApiSlice"
+import { Button, CardProduct } from "~/components";
+import CategoryRectangle from "~/components/icon/CategoryRectangle";
+import { useGetLimitProductQuery } from "~/features/products/productApiSlice";
 
 const CategoryList = (props) => {
-    const { titleCategory, titleEvent, buttonBottom = false } = props
+    const { titleCategory, titleEvent, buttonBottom = false } = props;
 
     const {
         data: products,
@@ -11,22 +11,22 @@ const CategoryList = (props) => {
         isSuccess,
         isError,
         error,
-    } = useGetLimitProductQuery()
+    } = useGetLimitProductQuery();
 
-    let content
+    let content;
     if (isLoading) {
-        content = <p>Loading...</p>
+        content = <p>Loading...</p>;
     } else if (isSuccess) {
-        const items = products?.metadata?.products
+        const items = products?.metadata?.products;
         content = (
             <>
                 {items.map((item, index) => (
                     <CardProduct key={index} {...item} />
                 ))}
             </>
-        )
+        );
     } else if (isError) {
-        content = <p>{error}</p>
+        content = <p>{error}</p>;
     }
     return (
         <div className="product-list relative">
@@ -63,7 +63,7 @@ const CategoryList = (props) => {
                 </div>
             )}
         </div>
-    )
-}
+    );
+};
 
-export default CategoryList
+export default CategoryList;

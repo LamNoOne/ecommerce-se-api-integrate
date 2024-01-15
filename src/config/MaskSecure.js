@@ -1,34 +1,31 @@
 function maskEmail(email) {
     // Split the email address into username and domain
-    const [username, domain] = email.split("@")
+    const [username, domain] = email.split("@");
 
     // Replace characters in the username with asterisks
     const hiddenUsername =
-        username[0] + "*".repeat(username.length - 2) + username.slice(-1)
+        username[0] + "*".repeat(username.length - 2) + username.slice(-1);
 
     // Recreate the masked email address
-    const maskedEmail = hiddenUsername + "@" + domain
+    const maskedEmail = hiddenUsername + "@" + domain;
 
-    return maskedEmail
+    return maskedEmail;
 }
 
 function maskPhoneNumber(phoneNumber) {
     // Check if the phoneNumber is a valid string
     if (typeof phoneNumber !== "string") {
-        console.error("Input must be a string.")
-        return null
+        console.error("Input must be a string.");
+        return null;
     }
 
     // Replace characters in the beginning with asterisks
-    const hiddenPart = "*".repeat(phoneNumber.length - 2)
+    const hiddenPart = "*".repeat(phoneNumber.length - 2);
 
     // Keep the last two characters
-    const maskedPhoneNumber = hiddenPart + phoneNumber.slice(-2)
+    const maskedPhoneNumber = hiddenPart + phoneNumber.slice(-2);
 
-    return maskedPhoneNumber
+    return maskedPhoneNumber;
 }
 
-export {
-    maskEmail,
-    maskPhoneNumber
-}
+export { maskEmail, maskPhoneNumber };

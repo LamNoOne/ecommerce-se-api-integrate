@@ -1,7 +1,7 @@
-import { useRoutes } from "react-router-dom"
-import { Loader } from "~/components"
-import RequireAuth from "~/features/auth/RequireAuth"
-import { Authentication, DefaultLayout } from "~/layout"
+import { useRoutes } from "react-router-dom";
+import { Loader } from "~/components";
+import RequireAuth from "~/features/auth/RequireAuth";
+import { Authentication, DefaultLayout } from "~/layout";
 import {
     Home,
     Login,
@@ -22,7 +22,7 @@ import {
     Support,
     Feedback,
     ProductSearch,
-} from "~/views"
+} from "~/views";
 
 export default function Router() {
     let element = useRoutes([
@@ -232,6 +232,6 @@ export default function Router() {
                 { path: "/signup", element: <Signup /> },
             ],
         },
-    ])
-    return element
+    ]);
+    return element;
 }

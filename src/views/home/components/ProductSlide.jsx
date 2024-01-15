@@ -1,14 +1,14 @@
-import { useRef } from "react"
-import "swiper/css"
-import "swiper/css/navigation"
-import "swiper/css/pagination"
-import { Navigation } from "swiper/modules"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { NavigationSlide } from "~/components"
-import { NextBtn, PrevBtn } from "~/components/icon"
-import CategoryRectangle from "~/components/icon/CategoryRectangle"
-import style from "~/style"
-import { useGetLimitProductQuery } from "~/features/products/productApiSlice"
+import { useRef } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { NavigationSlide } from "~/components";
+import { NextBtn, PrevBtn } from "~/components/icon";
+import CategoryRectangle from "~/components/icon/CategoryRectangle";
+import style from "~/style";
+import { useGetLimitProductQuery } from "~/features/products/productApiSlice";
 
 const ProductSlide = (props) => {
     const {
@@ -19,16 +19,16 @@ const ProductSlide = (props) => {
         titleCategory,
         titleEvent,
         numberOfCard,
-    } = props
+    } = props;
 
-    const refPrev = useRef()
-    const refNext = useRef()
+    const refPrev = useRef();
+    const refNext = useRef();
     const handleClickPrevBtn = () => {
-        refPrev.current.click()
-    }
+        refPrev.current.click();
+    };
     const handleClickNextBtn = () => {
-        refNext.current.click()
-    }
+        refNext.current.click();
+    };
 
     const {
         data: products,
@@ -36,13 +36,13 @@ const ProductSlide = (props) => {
         isSuccess,
         isError,
         error,
-    } = useGetLimitProductQuery()
+    } = useGetLimitProductQuery();
 
-    let content
+    let content;
     if (isLoading) {
-        content = <p>Loading...</p>
+        content = <p>Loading...</p>;
     } else if (isSuccess) {
-        const items = products?.metadata?.products
+        const items = products?.metadata?.products;
         content = (
             <Swiper
                 className="swipper-custom mb-[60px]"
@@ -52,8 +52,7 @@ const ProductSlide = (props) => {
                 pagination={{
                     type: "fraction",
                 }}
-                modules={Navigation}
-            >
+                modules={Navigation}>
                 {Array.isArray(items) ? (
                     items.map((item) => (
                         <SwiperSlide key={item.id}>
@@ -67,9 +66,9 @@ const ProductSlide = (props) => {
                     <NavigationSlide refPrev={refPrev} refNext={refNext} />
                 </div>
             </Swiper>
-        )
+        );
     } else if (isError) {
-        content = <p>{error}</p>
+        content = <p>{error}</p>;
     }
 
     return (
@@ -84,8 +83,7 @@ const ProductSlide = (props) => {
                     </div>
                     <div className="event flex items-end">
                         <h1
-                            className={`text-[32px] leading-[36px] font-semibold tracking-[1.44px] font-[Inter] text-black me-[87px]`}
-                        >
+                            className={`text-[32px] leading-[36px] font-semibold tracking-[1.44px] font-[Inter] text-black me-[87px]`}>
                             {titleEvent}
                         </h1>
                     </div>
@@ -97,14 +95,12 @@ const ProductSlide = (props) => {
                 <div className="swiper-nav-btns mb-10">
                     <button
                         className="swiper-btn hover:bg-[#00000033] hover:cursor-pointer swiper-btn-prev mr-2 inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-none outline-none bg-[#f5f5f5] text-black shadow-md"
-                        onClick={handleClickPrevBtn}
-                    >
+                        onClick={handleClickPrevBtn}>
                         <PrevBtn />
                     </button>
                     <button
                         className="swiper-btn hover:bg-[#00000033] hover:cursor-pointer swiper-btn-next inline-flex justify-center items-center w-[46px] h-[46px] rounded-full border-none outline-none bg-[#f5f5f5] text-black shadow-md"
-                        onClick={handleClickNextBtn}
-                    >
+                        onClick={handleClickNextBtn}>
                         <NextBtn />
                     </button>
                 </div>
@@ -119,7 +115,7 @@ const ProductSlide = (props) => {
             )}
             {Line && <Line style={style.lineStyleMain} />}
         </div>
-    )
-}
+    );
+};
 
-export default ProductSlide
+export default ProductSlide;

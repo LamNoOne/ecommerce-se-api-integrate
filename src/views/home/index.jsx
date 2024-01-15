@@ -1,10 +1,10 @@
-import style from "~/style"
+import style from "~/style";
 import {
     Advertisement,
     CardProduct,
     Category,
     CategoryButton,
-} from "~/components"
+} from "~/components";
 
 import {
     CategoryList,
@@ -13,13 +13,13 @@ import {
     Event,
     Feature,
     Timer,
-} from "./components"
+} from "./components";
 
 import {
     advertisement,
     // category,
-    categoryBrowse 
-} from "~/components/variables"
+    categoryBrowse,
+} from "~/components/variables";
 
 const Home = () => {
     return (
@@ -75,7 +75,7 @@ const Home = () => {
                 <Feature />
             </section>
         </div>
-    )
-}
+    );
+};
 
-export default Home
+export default Home;

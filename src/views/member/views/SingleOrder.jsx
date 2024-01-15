@@ -1,67 +1,67 @@
-import React from "react"
-import SideBar from "../components/SideBar"
-import { FaAngleDoubleLeft } from "react-icons/fa"
-import { useNavigate, useParams } from "react-router-dom"
-import { BsFillBoxSeamFill } from "react-icons/bs"
-import { GiConfirmed } from "react-icons/gi"
-import { TbTruckDelivery } from "react-icons/tb"
-import { FaBoxOpen } from "react-icons/fa"
-import { AiOutlineDash } from "react-icons/ai"
-import PaymentBox from "../components/PaymentBox"
-import MemberInfo from "../components/MemberInfo"
-import SupportInfo from "../components/SupportInfo"
-import { statusRecord } from "~/config/StatusRecord"
-import { useGetOrderByIdQuery } from "~/features/order/orderApiSlice"
-import OrderedProductDetail from "../components/OrderedProductDetail"
-import getUserInfoFromLocalStorage from "~/config/GetUserInfo"
+import React from "react";
+import SideBar from "../components/SideBar";
+import { FaAngleDoubleLeft } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
+import { BsFillBoxSeamFill } from "react-icons/bs";
+import { GiConfirmed } from "react-icons/gi";
+import { TbTruckDelivery } from "react-icons/tb";
+import { FaBoxOpen } from "react-icons/fa";
+import { AiOutlineDash } from "react-icons/ai";
+import PaymentBox from "../components/PaymentBox";
+import MemberInfo from "../components/MemberInfo";
+import SupportInfo from "../components/SupportInfo";
+import { statusRecord } from "~/config/StatusRecord";
+import { useGetOrderByIdQuery } from "~/features/order/orderApiSlice";
+import OrderedProductDetail from "../components/OrderedProductDetail";
+import getUserInfoFromLocalStorage from "~/config/GetUserInfo";
 
 const SingleOrder = () => {
-    const navigate = useNavigate()
-    let { id: orderId } = useParams()
+    const navigate = useNavigate();
+    let { id: orderId } = useParams();
     const {
         data: orders,
         isLoading,
         isSuccess,
         isError,
         error,
-    } = useGetOrderByIdQuery(orderId)
+    } = useGetOrderByIdQuery(orderId);
 
-    let userInfo
-    let orderedProducts
-    let productContent
-    let orderStatus
-    let orderPaymentForm
-    let totalCost
-    let colorRecord
+    let userInfo;
+    let orderedProducts;
+    let productContent;
+    let orderStatus;
+    let orderPaymentForm;
+    let totalCost;
+    let colorRecord;
     if (isLoading) {
-        productContent = <p>Loading...</p>
+        productContent = <p>Loading...</p>;
     } else if (isSuccess) {
-        orderedProducts = orders?.metadata?.order
-        orderStatus = orderedProducts?.orderStatus?.name
-        colorRecord = statusRecord[orderStatus]
-        orderPaymentForm = orderedProducts?.paymentForm?.name
+        orderedProducts = orders?.metadata?.order;
+        orderStatus = orderedProducts?.orderStatus?.name;
+        colorRecord = statusRecord[orderStatus];
+        orderPaymentForm = orderedProducts?.paymentForm?.name;
         productContent = Array.isArray(orderedProducts.products) ? (
             orderedProducts.products.map((item, index) => (
                 <OrderedProductDetail key={index} {...item} />
             ))
         ) : (
             <></>
-        )
+        );
 
         totalCost = orderedProducts?.products?.reduce(
             (acc, cur) => acc + cur.quantity * cur.price,
             0
-        )
+        );
 
-        const user = getUserInfoFromLocalStorage()
+        const user = getUserInfoFromLocalStorage();
 
         userInfo = {
             name: `${user?.firstName} ${user?.lastName}`,
             phone: `${orderedProducts?.phoneNumber}`,
             address: `${orderedProducts?.shipAddress}`,
-        }
+        };
     } else if (isError) {
-        productContent = <p>{error}</p>
+        productContent = <p>{error}</p>;
     }
 
     return (
@@ -73,8 +73,7 @@ const SingleOrder = () => {
                 <div className="flex items-center header-order-detail">
                     <button
                         className="back"
-                        onClick={() => navigate("/member/order")}
-                    >
+                        onClick={() => navigate("/member/order")}>
                         <FaAngleDoubleLeft size={32} />
                     </button>
                     <h1 className="text-2xl text-center font-semibold ms-[45%]">
@@ -105,8 +104,7 @@ const SingleOrder = () => {
                             color={`${colorRecord?.colorIcon_1}`}
                         />
                         <h5
-                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_1}`}
-                        >
+                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_1}`}>
                             Đặt hàng <br />
                             thành công
                         </h5>
@@ -121,8 +119,7 @@ const SingleOrder = () => {
                             color={`${colorRecord?.colorIcon_2}`}
                         />
                         <h5
-                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_2}`}
-                        >
+                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_2}`}>
                             Đã <br />
                             xác nhận
                         </h5>
@@ -137,8 +134,7 @@ const SingleOrder = () => {
                             color={`${colorRecord?.colorIcon_3}`}
                         />
                         <h5
-                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_3}`}
-                        >
+                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_3}`}>
                             Đang <br />
                             vận chuyển
                         </h5>
@@ -153,8 +149,7 @@ const SingleOrder = () => {
                             color={`${colorRecord?.colorIcon_4}`}
                         />
                         <h5
-                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_4}`}
-                        >
+                            className={`flex text-center text-xs mt-2 ${colorRecord?.textColor_4}`}>
                             Đã <br />
                             giao hàng
                         </h5>
@@ -169,7 +164,7 @@ const SingleOrder = () => {
                 <SupportInfo />
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default SingleOrder
+export default SingleOrder;

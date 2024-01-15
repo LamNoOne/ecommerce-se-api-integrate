@@ -1,18 +1,21 @@
-import * as Yup from "yup"
-import { Field, Form, Formik } from "formik"
-import InputForm from "./InputForm"
-import classNames from "classnames/bind"
-import ProductFormInfo from "./ProductFormInfo"
-import { Line, Button } from "~/components"
-import style from '~/style'
-import images from "~/assets/images"
-import styles from "./Form.module.scss"
-import { useNavigate } from "react-router-dom"
-import { useGetUserQuery } from "~/features/user/userApiSlice"
-import { useCreateOrderFromCartMutation, useCreateOrderNowMutation } from "~/features/order/orderApiSlice"
-import { useGetCartByUserIdQuery } from "~/features/cart/cartApiSlice"
+import * as Yup from "yup";
+import { Field, Form, Formik } from "formik";
+import InputForm from "./InputForm";
+import classNames from "classnames/bind";
+import ProductFormInfo from "./ProductFormInfo";
+import { Line, Button } from "~/components";
+import style from "~/style";
+import images from "~/assets/images";
+import styles from "./Form.module.scss";
+import { useNavigate } from "react-router-dom";
+import { useGetUserQuery } from "~/features/user/userApiSlice";
+import {
+    useCreateOrderFromCartMutation,
+    useCreateOrderNowMutation,
+} from "~/features/order/orderApiSlice";
+import { useGetCartByUserIdQuery } from "~/features/cart/cartApiSlice";
 
-const cx = classNames.bind(styles)
+const cx = classNames.bind(styles);
 
 const checkOutForm = Yup.object().shape({
     name: Yup.string()
@@ -28,23 +31,25 @@ const checkOutForm = Yup.object().shape({
     phoneNumber: Yup.string()
         .required("Phone number should be added to contact with you")
         .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g, "Invalid phone number"),
-})
+});
 
 const fieldNames = {
     name: ["Name", false],
     streetAdrress: ["Street Address", false],
     phoneNumber: ["Phone Number", false],
-}
+};
 
 const requiredFields = Object.keys(fieldNames).filter(
     (key) => fieldNames[key][1]
-)
+);
 
 const CheckOutForm = (singlePurchasedProduct) => {
-    const navigate = useNavigate()
-    const [createOrderNow, { isLoading: isHandlingNow }] = useCreateOrderNowMutation()
-    const [createOrderFromCart, { isLoading: isHandlingCart }] = useCreateOrderFromCartMutation()
-    const isOrderFromCart = Object.keys(singlePurchasedProduct).length === 0
+    const navigate = useNavigate();
+    const [createOrderNow, { isLoading: isHandlingNow }] =
+        useCreateOrderNowMutation();
+    const [createOrderFromCart, { isLoading: isHandlingCart }] =
+        useCreateOrderFromCartMutation();
+    const isOrderFromCart = Object.keys(singlePurchasedProduct).length === 0;
 
     // Get from state, when have time i'll handle it
     const {
@@ -53,7 +58,7 @@ const CheckOutForm = (singlePurchasedProduct) => {
         isSuccess,
         isError,
         error,
-    } = useGetUserQuery()
+    } = useGetUserQuery();
 
     const {
         data: cart,
@@ -61,45 +66,45 @@ const CheckOutForm = (singlePurchasedProduct) => {
         isSuccess: isSuccessCart,
         isError: isErrorCart,
         error: errorCart,
-    } = useGetCartByUserIdQuery()
+    } = useGetCartByUserIdQuery();
 
-    let username = `${user?.metadata?.user?.lastName} ${user?.metadata?.user?.firstName}`
-    let address = `${user?.metadata?.user?.address}`
-    let phone = `${user?.metadata?.user?.phoneNumber}`
+    let username = `${user?.metadata?.user?.lastName} ${user?.metadata?.user?.firstName}`;
+    let address = `${user?.metadata?.user?.address}`;
+    let phone = `${user?.metadata?.user?.phoneNumber}`;
 
     const initialValues = {
         name: `${username}`,
         streetAdrress: `${address}`,
         phoneNumber: `${phone}`,
         paymentFormId: "",
-    }
+    };
 
-    let cartProduct
+    let cartProduct;
     // If customer buy a single product which doesn't have in cart
     // singlePurchasedProduct contains enough information to create order
     if (isOrderFromCart) {
         if (isLoadingCart) {
-            cartProduct = <p>Loading...</p>
+            cartProduct = <p>Loading...</p>;
         } else if (isSuccessCart) {
-            cartProduct = cart?.metadata?.cart?.products
+            cartProduct = cart?.metadata?.cart?.products;
         } else if (isErrorCart) {
-            cartProduct = <p>{errorCart}</p>
+            cartProduct = <p>{errorCart}</p>;
         }
     } else {
-        cartProduct = singlePurchasedProduct
+        cartProduct = singlePurchasedProduct;
     }
 
-    let orderProducts
+    let orderProducts;
     if (Array.isArray(cartProduct)) {
         orderProducts = cartProduct.map((product) => ({
             productId: product?.product?.id,
             quantity: product?.quantity,
-        }))
+        }));
     } else {
         orderProducts = {
             productId: cartProduct?.productId,
             quantity: cartProduct?.quantity,
-        }
+        };
     }
 
     let sumTotal = Array.isArray(cartProduct)
@@ -107,7 +112,7 @@ const CheckOutForm = (singlePurchasedProduct) => {
               (acc, cur) => acc + cur?.quantity * cur?.product?.price,
               0
           )
-        : cartProduct?.quantity * cartProduct?.price
+        : cartProduct?.quantity * cartProduct?.price;
 
     const handleCreateOrder = async (values, orderProducts) => {
         const orderInfo = {
@@ -115,40 +120,39 @@ const CheckOutForm = (singlePurchasedProduct) => {
             phoneNumber: values.phoneNumber,
             paymentFormId: values.paymentFormId,
             order: orderProducts,
-        }
+        };
 
-        if(isOrderFromCart && !isHandlingCart) {
+        if (isOrderFromCart && !isHandlingCart) {
             try {
-                const result = await createOrderFromCart(orderInfo).unwrap()
-                navigate(`/member/order/${result?.metadata?.orderId}`)
+                const result = await createOrderFromCart(orderInfo).unwrap();
+                navigate(`/member/order/${result?.metadata?.orderId}`);
             } catch (error) {
-                console.error('Error when order from cart', error)
+                console.error("Error when order from cart", error);
             }
-        } else if(!isHandlingNow) {
+        } else if (!isHandlingNow) {
             try {
-                const result = await createOrderNow(orderInfo).unwrap()
-                navigate(`/member/order/${result?.metadata?.orderId}`)
+                const result = await createOrderNow(orderInfo).unwrap();
+                navigate(`/member/order/${result?.metadata?.orderId}`);
             } catch (error) {
-                console.error('Error when order product', error)
+                console.error("Error when order product", error);
             }
         }
-    }
+    };
 
-    let content
+    let content;
     if (isLoading) {
-        content = <p>Loading...</p>
+        content = <p>Loading...</p>;
     } else if (isSuccess) {
         content = (
             <Formik
                 initialValues={initialValues}
                 validationSchema={checkOutForm}
                 onSubmit={async (values) => {
-                    await handleCreateOrder(values, orderProducts)
+                    await handleCreateOrder(values, orderProducts);
                     // navigate("/member/order/1")
-                }}
-            >
+                }}>
                 {(formik) => {
-                    const { errors, touched, isValid, dirty } = formik
+                    const { errors, touched, isValid, dirty } = formik;
                     return (
                         <div className={cx("container")}>
                             <Form>
@@ -185,7 +189,9 @@ const CheckOutForm = (singlePurchasedProduct) => {
                                                 </p>
                                             </div>
                                             <div className="w-full my-4">
-                                                <Line style={style.lineStyleForm} />
+                                                <Line
+                                                    style={style.lineStyleForm}
+                                                />
                                             </div>
                                             <div className="flex items-center justify-between">
                                                 <h3 className="shippinh">
@@ -194,7 +200,9 @@ const CheckOutForm = (singlePurchasedProduct) => {
                                                 <p className="">Free</p>
                                             </div>
                                             <div className="w-full my-4">
-                                                <Line style={style.lineStyleForm} />
+                                                <Line
+                                                    style={style.lineStyleForm}
+                                                />
                                             </div>
                                             <div className="flex items-center justify-between">
                                                 <h3 className="shippinh">
@@ -209,8 +217,7 @@ const CheckOutForm = (singlePurchasedProduct) => {
                                             <div
                                                 role="group"
                                                 aria-labelledby="my-radio-group"
-                                                className="flex flex-col"
-                                            >
+                                                className="flex flex-col">
                                                 <label className="flex items-center justify-between">
                                                     <div className="flex items-center">
                                                         <Field
@@ -267,8 +274,7 @@ const CheckOutForm = (singlePurchasedProduct) => {
                                                         ? cx("disabled-btn")
                                                         : ""
                                                 }
-                                                disabled={!(dirty && isValid)}
-                                            >
+                                                disabled={!(dirty && isValid)}>
                                                 Place Order
                                             </Button>
                                         </div>
@@ -276,15 +282,15 @@ const CheckOutForm = (singlePurchasedProduct) => {
                                 </div>
                             </Form>
                         </div>
-                    )
+                    );
                 }}
             </Formik>
-        )
+        );
     } else if (isError) {
-        content = <p>{error}</p>
+        content = <p>{error}</p>;
     }
 
-    return <>{content}</>
-}
+    return <>{content}</>;
+};
 
-export default CheckOutForm
+export default CheckOutForm;

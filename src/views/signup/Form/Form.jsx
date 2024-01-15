@@ -1,12 +1,12 @@
-import { ErrorMessage, Field, Form, Formik } from "formik"
-import * as Yup from "yup"
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup";
 
-import classNames from "classnames/bind"
-import { Link } from "react-router-dom"
-import styles from "./Form.module.scss"
-import { useSignupMutation } from "~/features/auth/authApiSlice"
-import { useNavigate } from "react-router-dom"
-const cx = classNames.bind(styles)
+import classNames from "classnames/bind";
+import { Link } from "react-router-dom";
+import styles from "./Form.module.scss";
+import { useSignupMutation } from "~/features/auth/authApiSlice";
+import { useNavigate } from "react-router-dom";
+const cx = classNames.bind(styles);
 
 const signUpSchema = Yup.object().shape({
     username: Yup.string()
@@ -45,7 +45,7 @@ const signUpSchema = Yup.object().shape({
         [Yup.ref("password"), null],
         "Passwords must match"
     ),
-})
+});
 
 const initialValues = {
     username: "",
@@ -56,30 +56,29 @@ const initialValues = {
     address: "",
     password: "",
     passwordConfirmation: "",
-}
+};
 
 const SignUpForm = () => {
-    const navigate = useNavigate()
-    const [signup, { isLoading }] = useSignupMutation()
-    
+    const navigate = useNavigate();
+    const [signup, { isLoading }] = useSignupMutation();
+
     return (
         <Formik
             initialValues={initialValues}
             validationSchema={signUpSchema}
             onSubmit={async (values) => {
-                delete values.passwordConfirmation
-                if(!isLoading) {
+                delete values.passwordConfirmation;
+                if (!isLoading) {
                     try {
-                        await signup(values)
-                        navigate('/login')
+                        await signup(values);
+                        navigate("/login");
                     } catch (error) {
-                        console.error(error)
+                        console.error(error);
                     }
                 }
-            }}
-        >
+            }}>
             {(formik) => {
-                const { errors, touched, isValid, dirty } = formik
+                const { errors, touched, isValid, dirty } = formik;
                 return (
                     <div className={cx("container")}>
                         <h1>Create an account</h1>
@@ -142,15 +141,16 @@ const SignUpForm = () => {
                             <div
                                 className="flex items-center gap-8"
                                 role="group"
-                                aria-labelledby="my-radio-group"
-                            >
+                                aria-labelledby="my-radio-group">
                                 <label className="flex items-center gap-3 m-0">
                                     <Field
                                         type="radio"
                                         name="genderId"
                                         value="1"
                                     />
-                                    <span className="text-base text-[#4a4a4a] font-medium">Male</span>
+                                    <span className="text-base text-[#4a4a4a] font-medium">
+                                        Male
+                                    </span>
                                 </label>
                                 <label className="flex items-center gap-3 m-0">
                                     <Field
@@ -158,7 +158,9 @@ const SignUpForm = () => {
                                         name="genderId"
                                         value="0"
                                     />
-                                    <span className="text-base text-[#4a4a4a] font-medium">Female</span>
+                                    <span className="text-base text-[#4a4a4a] font-medium">
+                                        Female
+                                    </span>
                                 </label>
                             </div>
 
@@ -266,8 +268,7 @@ const SignUpForm = () => {
                                         ? cx("disabled-btn")
                                         : ""
                                 }
-                                disabled={!(dirty && isValid)}
-                            >
+                                disabled={!(dirty && isValid)}>
                                 Create Account
                             </button>
                             <div className={cx("account-ready")}>
@@ -279,18 +280,17 @@ const SignUpForm = () => {
                                         className={cx(
                                             "account-content",
                                             "account-content-link"
-                                        )}
-                                    >
+                                        )}>
                                         Log in
                                     </span>
                                 </Link>
                             </div>
                         </Form>
                     </div>
-                )
+                );
             }}
         </Formik>
-    )
-}
+    );
+};
 
-export default SignUpForm
+export default SignUpForm;

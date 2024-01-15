@@ -1,4 +1,3 @@
-
 function UserLoginIcon() {
     return (
         <svg
@@ -6,8 +5,7 @@ function UserLoginIcon() {
             width="32"
             height="32"
             viewBox="0 0 32 32"
-            fill="none"
-        >
+            fill="none">
             <rect width="32" height="32" rx="16" fill="#DB4444" />
             <path
                 d="M21 23V21.3333C21 20.4493 20.691 19.6014 20.1408 18.9763C19.5907 18.3512 18.8446 18 18.0667 18H12.9333C12.1554 18 11.4093 18.3512 10.8592 18.9763C10.309 19.6014 10 20.4493 10 21.3333V23"
@@ -24,7 +22,7 @@ function UserLoginIcon() {
                 strokeLinejoin="round"
             />
         </svg>
-    )
+    );
 }
 
-export default UserLoginIcon
+export default UserLoginIcon;

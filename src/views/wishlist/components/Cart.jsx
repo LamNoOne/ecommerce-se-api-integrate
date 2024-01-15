@@ -1,7 +1,7 @@
-import { WishlistProduct } from "~/components"
+import { WishlistProduct } from "~/components";
 
 const Cart = (props) => {
-    const { items } = props
+    const { items } = props;
     return (
         <div className="product-list relative">
             <div className="flex justify-between items-center mb-10 mt-20">
@@ -17,7 +17,7 @@ const Cart = (props) => {
                 ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Cart
+export default Cart;

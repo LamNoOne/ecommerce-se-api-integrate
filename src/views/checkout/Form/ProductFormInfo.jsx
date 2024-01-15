@@ -1,16 +1,15 @@
-import React from "react"
+import React from "react";
 //props or useSelector to get the state
 
 const ProductFormInfo = ({ carts }) => {
-    let content
+    let content;
     if (Array.isArray(carts)) {
         content = (
             <>
                 {carts.map((cart, index) => (
                     <div
                         key={index}
-                        className="flex items-center justify-between w-full"
-                    >
+                        className="flex items-center justify-between w-full">
                         <div className="flex items-center gap-6">
                             <img
                                 className="w-[54px] h-[54px] p-1 object-contain"
@@ -36,12 +35,10 @@ const ProductFormInfo = ({ carts }) => {
                     </div>
                 ))}
             </>
-        )
+        );
     } else {
         content = (
-            <div
-                className="flex items-center justify-between w-full"
-            >
+            <div className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-6">
                     <img
                         className="w-[54px] h-[54px] p-1 object-contain"
@@ -61,10 +58,10 @@ const ProductFormInfo = ({ carts }) => {
                     </p>
                 </div>
             </div>
-        )
+        );
     }
 
-    return <>{content}</>
-}
+    return <>{content}</>;
+};
 
-export default ProductFormInfo
+export default ProductFormInfo;

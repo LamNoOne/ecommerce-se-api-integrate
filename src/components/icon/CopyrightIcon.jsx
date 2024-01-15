@@ -1,6 +1,11 @@
 const CopyrightIcon = () => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20" fill="none">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="19"
+            height="20"
+            viewBox="0 0 19 20"
+            fill="none">
             <path
                 d="M9.49999 18.3332C14.1024 18.3332 17.8333 14.6022 17.8333 9.99984C17.8333 5.39746 14.1024 1.6665 9.49999 1.6665C4.89762 1.6665 1.16666 5.39746 1.16666 9.99984C1.16666 14.6022 4.89762 18.3332 9.49999 18.3332Z"
                 stroke="white"
@@ -16,7 +21,7 @@ const CopyrightIcon = () => {
                 strokeLinejoin="round"
             />
         </svg>
-    )
-}
+    );
+};
 
-export default CopyrightIcon
+export default CopyrightIcon;

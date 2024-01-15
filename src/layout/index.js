@@ -1,8 +1,4 @@
-import Authentication from "./authentication"
-import DefaultLayout from "./defaultLayout"
+import Authentication from "./authentication";
+import DefaultLayout from "./defaultLayout";
 
-export {
-    Authentication,
-    DefaultLayout
-}
-
+export { Authentication, DefaultLayout };

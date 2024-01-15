@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const DeleteIcon = () => {
     return (
@@ -7,8 +7,7 @@ const DeleteIcon = () => {
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            fill="none"
-        >
+            fill="none">
             <path
                 d="M20 5.57143H5.33333L6.66667 21H17.3333L18.6667 5.57143H4M12 9.42857V17.1429M15.3333 9.42857L14.6667 17.1429M8.66667 9.42857L9.33333 17.1429M9.33333 5.57143L10 3H14L14.6667 5.57143"
                 stroke="black"
@@ -17,7 +16,7 @@ const DeleteIcon = () => {
                 strokeLinejoin="round"
             />
         </svg>
-    )
-}
+    );
+};
 
-export default DeleteIcon
+export default DeleteIcon;

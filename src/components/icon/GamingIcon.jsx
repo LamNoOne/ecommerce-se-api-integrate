@@ -5,8 +5,7 @@ export default function GamingIcon() {
             width="56"
             height="56"
             viewBox="0 0 56 56"
-            fill="none"
-        >
+            fill="none">
             <g clipPath="url(#clip0_803_809)">
                 <path
                     d="M46.6666 14H9.33329C6.75596 14 4.66663 16.0893 4.66663 18.6667V37.3333C4.66663 39.9107 6.75596 42 9.33329 42H46.6666C49.244 42 51.3333 39.9107 51.3333 37.3333V18.6667C51.3333 16.0893 49.244 14 46.6666 14Z"
@@ -43,5 +42,5 @@ export default function GamingIcon() {
                 </clipPath>
             </defs>
         </svg>
-    )
+    );
 }

@@ -1,5 +1,5 @@
-import { CustomerServiceIcon, DeliveryServiceIcon, SercureIcon } from "../icon"
-import SingleService from "./SingleService"
+import { CustomerServiceIcon, DeliveryServiceIcon, SercureIcon } from "../icon";
+import SingleService from "./SingleService";
 
 const Service = () => {
     return (
@@ -20,7 +20,7 @@ const Service = () => {
                 serviceIcon={<SercureIcon />}
             />
         </div>
-    )
-}
+    );
+};
 
-export default Service
+export default Service;

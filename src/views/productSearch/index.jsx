@@ -1,24 +1,24 @@
-import { Advertisement, Category, PageButton } from "~/components"
-import { advertisement } from "~/components/variables"
-import style from "~/style"
-import { GrPowerReset } from "react-icons/gr"
-import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa"
-import { Product } from "~/components"
-import { useState } from "react"
-import { useLocation } from "react-router-dom"
-import { useSearchProductQuery } from "~/features/products/productApiSlice"
-import { useNavigate } from "react-router-dom"
+import { Advertisement, Category, PageButton } from "~/components";
+import { advertisement } from "~/components/variables";
+import style from "~/style";
+import { GrPowerReset } from "react-icons/gr";
+import { FaSortAmountDown, FaSortAmountDownAlt } from "react-icons/fa";
+import { Product } from "~/components";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useSearchProductQuery } from "~/features/products/productApiSlice";
+import { useNavigate } from "react-router-dom";
 
 const ProductSearch = () => {
-    const location = useLocation()
-    const navigate = useNavigate()
-    const nameSearch = location.state
-    if(!nameSearch?.value) {
-        navigate('/product', { replace: true })
+    const location = useLocation();
+    const navigate = useNavigate();
+    const nameSearch = location.state;
+    if (!nameSearch?.value) {
+        navigate("/product", { replace: true });
     }
 
-    const [page, setPage] = useState(1)
-    const [sortActive, setSortActive] = useState(null)
+    const [page, setPage] = useState(1);
+    const [sortActive, setSortActive] = useState(null);
 
     const {
         data: products,
@@ -30,46 +30,45 @@ const ProductSearch = () => {
         name: nameSearch?.value,
         page,
         order: sortActive,
-    })
+    });
 
-    let content
+    let content;
     if (isLoading) {
-        content = <p>Loading...</p>
+        content = <p>Loading...</p>;
     } else if (isSuccess) {
-        content = <Product products={products?.metadata?.products} />
+        content = <Product products={products?.metadata?.products} />;
     } else if (isError) {
-        content = <p>{error}</p>
+        content = <p>{error}</p>;
     }
 
     const sort = {
         asc: [FaSortAmountDown, "Price Low-High"],
         desc: [FaSortAmountDownAlt, "Price High-Low"],
         reset: [GrPowerReset, "Reset"],
-    }
+    };
 
     const sortActiveHandler = (key) => {
-        if (String(key) !== 'reset') {
-            setSortActive(key)
+        if (String(key) !== "reset") {
+            setSortActive(key);
         } else {
-            setSortActive(null)
+            setSortActive(null);
         }
-    }
+    };
 
-    const lastPage = () => setPage(products?.metadata?.totalPage)
+    const lastPage = () => setPage(products?.metadata?.totalPage);
 
-    const firstPage = () => setPage(1)
+    const firstPage = () => setPage(1);
 
     const pagesArray = Array(products?.metadata?.totalPage)
         .fill()
-        .map((_, index) => index + 1)
+        .map((_, index) => index + 1);
 
     const nav = (
         <nav className="nav-ex2 flex items-center justify-center gap-3">
             <button
                 className="text-xl text-white w-[32px] h-[32px] rounded-lg bg-slate-500 disabled:bg-slate-300"
                 onClick={firstPage}
-                disabled={page === 1}
-            >
+                disabled={page === 1}>
                 &lt;&lt;
             </button>
             {pagesArray.map((pg) => (
@@ -78,12 +77,11 @@ const ProductSearch = () => {
             <button
                 className="text-xl text-white w-[32px] h-[32px] rounded-lg bg-slate-500 disabled:bg-slate-300"
                 onClick={lastPage}
-                disabled={page === products?.metadata?.totalPage}
-            >
+                disabled={page === products?.metadata?.totalPage}>
                 &gt;&gt;
             </button>
         </nav>
-    )
+    );
 
     return (
         <div className="flex flex-col gap-16 mb-8">
@@ -109,8 +107,7 @@ const ProductSearch = () => {
                                     key === sortActive
                                         ? "border-[#ff0000]"
                                         : "border-[#e5e7eb]"
-                                } h-[34px]`}
-                            >
+                                } h-[34px]`}>
                                 <Icon
                                     color={`${key === sortActive ? "red" : ""}`}
                                 />
@@ -119,8 +116,7 @@ const ProductSearch = () => {
                                         key === sortActive
                                             ? "text-[#ff0000]"
                                             : "text-[black]"
-                                    }`}
-                                >
+                                    }`}>
                                     {title}
                                 </p>
                             </button>
@@ -131,7 +127,7 @@ const ProductSearch = () => {
             {content}
             {nav}
         </div>
-    )
-}
+    );
+};
 
-export default ProductSearch
+export default ProductSearch;

@@ -5,8 +5,7 @@ export default function ComputerIcon() {
             width="56"
             height="56"
             viewBox="0 0 56 56"
-            fill="none"
-        >
+            fill="none">
             <g clipPath="url(#clip0_803_613)">
                 <path
                     d="M46.6667 9.33337H9.33333C8.04467 9.33337 7 10.378 7 11.6667V35C7 36.2887 8.04467 37.3334 9.33333 37.3334H46.6667C47.9553 37.3334 49 36.2887 49 35V11.6667C49 10.378 47.9553 9.33337 46.6667 9.33337Z"
@@ -49,5 +48,5 @@ export default function ComputerIcon() {
                 </clipPath>
             </defs>
         </svg>
-    )
+    );
 }

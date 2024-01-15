@@ -5,8 +5,7 @@ const UserLightIcon = () => {
             width="32"
             height="32"
             viewBox="0 0 32 32"
-            fill="none"
-        >
+            fill="none">
             <path
                 d="M24 27V24.3333C24 22.9188 23.5224 21.5623 22.6722 20.5621C21.8221 19.5619 20.669 19 19.4667 19H11.5333C10.331 19 9.17795 19.5619 8.32778 20.5621C7.47762 21.5623 7 22.9188 7 24.3333V27"
                 stroke="lightgrey"
@@ -22,7 +21,7 @@ const UserLightIcon = () => {
                 strokeLinejoin="round"
             />
         </svg>
-    )
-}
+    );
+};
 
-export default UserLightIcon
+export default UserLightIcon;

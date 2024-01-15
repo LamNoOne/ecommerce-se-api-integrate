@@ -1,24 +1,28 @@
-import { ErrorMessage, Field } from "formik"
-import classNames from "classnames/bind"
-import styles from "./Form.module.scss"
-const cx = classNames.bind(styles)
+import { ErrorMessage, Field } from "formik";
+import classNames from "classnames/bind";
+import styles from "./Form.module.scss";
+const cx = classNames.bind(styles);
 
 const InputForm = ({ field, requiredFields, name, errors, touched }) => {
     return (
         <div className={cx("form-row")}>
-            <label className={cx('label')} htmlFor={field}>
+            <label className={cx("label")} htmlFor={field}>
                 {name}
-                {requiredFields.includes(field) ? <span className={cx("required-field")}>*</span> : ''}
-                </label>
+                {requiredFields.includes(field) ? (
+                    <span className={cx("required-field")}>*</span>
+                ) : (
+                    ""
+                )}
+            </label>
             <Field
                 name={field}
                 id={field}
                 className={
-                    errors.field && touched.field
-                        ? cx("input-error")
-                        : null
+                    errors.field && touched.field ? cx("input-error") : null
                 }
-                disabled={String(field) === 'name' || String(field) === 'phoneNumber'}
+                disabled={
+                    String(field) === "name" || String(field) === "phoneNumber"
+                }
             />
             <ErrorMessage
                 name={field}
@@ -26,7 +30,7 @@ const InputForm = ({ field, requiredFields, name, errors, touched }) => {
                 className={cx("error")}
             />
         </div>
-    )
-}
+    );
+};
 
-export default InputForm
+export default InputForm;

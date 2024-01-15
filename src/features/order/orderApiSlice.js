@@ -1,4 +1,4 @@
-import { apiSlice } from "../../app/api/apiSlice"
+import { apiSlice } from "../../app/api/apiSlice";
 
 export const orderApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -11,13 +11,9 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         }),
         createOrderFromCart: builder.mutation({
             query: (params) => {
-                const cartId = JSON.parse(localStorage.getItem("user"))?.id
-                const {
-                    shipAddress,
-                    phoneNumber,
-                    paymentFormId,
-                    order,
-                } = params
+                const cartId = JSON.parse(localStorage.getItem("user"))?.id;
+                const { shipAddress, phoneNumber, paymentFormId, order } =
+                    params;
                 return {
                     url: "/api/checkout/order-from-cart",
                     method: "POST",
@@ -28,18 +24,14 @@ export const orderApiSlice = apiSlice.injectEndpoints({
                         paymentFormId,
                         orderProducts: order,
                     },
-                }
+                };
             },
             invalidatesTags: ["Order", "Cart"],
         }),
         createOrderNow: builder.mutation({
             query: (params) => {
-                const {
-                    shipAddress,
-                    phoneNumber,
-                    paymentFormId,
-                    order,
-                } = params
+                const { shipAddress, phoneNumber, paymentFormId, order } =
+                    params;
                 return {
                     url: "/api/checkout/order",
                     method: "POST",
@@ -49,16 +41,16 @@ export const orderApiSlice = apiSlice.injectEndpoints({
                         paymentFormId,
                         orderProduct: order,
                     },
-                }
+                };
             },
             invalidatesTags: ["Order"],
         }),
     }),
-})
+});
 
 export const {
     useCreateOrderFromCartMutation,
     useCreateOrderNowMutation,
     useGetAllOrderQuery,
     useGetOrderByIdQuery,
-} = orderApiSlice
+} = orderApiSlice;

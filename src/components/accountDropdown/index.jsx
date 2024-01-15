@@ -1,2 +1,2 @@
-import AccountDropdown from "./AccountDropdown"
-export default AccountDropdown
+import AccountDropdown from "./AccountDropdown";
+export default AccountDropdown;

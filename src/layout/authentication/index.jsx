@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom"
-import { Container, Footer, Header } from "~/components"
+import { Outlet } from "react-router-dom";
+import { Container, Footer, Header } from "~/components";
 
 const Authentication = () => {
     return (
@@ -10,7 +10,7 @@ const Authentication = () => {
             </Container>
             <Footer />
         </section>
-    )
-}
+    );
+};
 
-export default Authentication
+export default Authentication;

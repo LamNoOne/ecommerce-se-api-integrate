@@ -1,18 +1,18 @@
-import PropsType from "prop-types"
-import EllipseIcon from "~/components/icon/EllipseIcon"
-import { useTimer } from "~/hooks"
+import PropsType from "prop-types";
+import EllipseIcon from "~/components/icon/EllipseIcon";
+import { useTimer } from "~/hooks";
 
 const Timer = ({ month, day, year }) => {
     let { days, hours, minutes, seconds } = useTimer(
         `${year}-${month}-${day}T23:59:59`
-    )
+    );
     let timeArr = Object.entries({
         Days: days,
         Hours: hours,
         Minutes: minutes,
         Seconds: seconds,
-    })
-    const length = timeArr.length
+    });
+    const length = timeArr.length;
     return (
         <div className="timer flex gap-[21px]">
             {timeArr.map(([label, value], index) => (
@@ -34,13 +34,13 @@ const Timer = ({ month, day, year }) => {
                 </div>
             ))}
         </div>
-    )
-}
+    );
+};
 
 Timer.propsType = {
     month: PropsType.number.isRequired,
     day: PropsType.number.isRequired,
     year: PropsType.number.isRequired,
-}
+};
 
-export default Timer
+export default Timer;

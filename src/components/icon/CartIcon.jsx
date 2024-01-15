@@ -1,13 +1,12 @@
 const CartIcon = (props) => {
-    const { width = 32, height = 32, color = "black" } = props
+    const { width = 32, height = 32, color = "black" } = props;
     return (
         <svg
             width={`${width}`}
             height={`${height}`}
             viewBox={`0 0 ${width} ${height}`}
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+            xmlns="http://www.w3.org/2000/svg">
             <g id="Cart1">
                 <path
                     id="Vector"
@@ -43,7 +42,7 @@ const CartIcon = (props) => {
                 />
             </g>
         </svg>
-    )
-}
+    );
+};
 
-export default CartIcon
+export default CartIcon;

@@ -5,8 +5,7 @@ export default function HeadPhoneIcon() {
             width="56"
             height="56"
             viewBox="0 0 56 56"
-            fill="none"
-        >
+            fill="none">
             <g clipPath="url(#clip0_803_644)">
                 <path
                     d="M16.3333 30.3334H14C11.4227 30.3334 9.33331 32.4227 9.33331 35V42C9.33331 44.5774 11.4227 46.6667 14 46.6667H16.3333C18.9106 46.6667 21 44.5774 21 42V35C21 32.4227 18.9106 30.3334 16.3333 30.3334Z"
@@ -36,5 +35,5 @@ export default function HeadPhoneIcon() {
                 </clipPath>
             </defs>
         </svg>
-    )
+    );
 }

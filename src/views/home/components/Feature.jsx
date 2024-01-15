@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom"
-import images from "~/assets/images"
-import { Service } from "~/components"
-import CategoryRectangle from "~/components/icon/CategoryRectangle"
+import { Link } from "react-router-dom";
+import images from "~/assets/images";
+import { Service } from "~/components";
+import CategoryRectangle from "~/components/icon/CategoryRectangle";
 
 const Feature = (props) => {
     // const { items } = props
@@ -32,8 +32,7 @@ const Feature = (props) => {
                         backgroundSize: "contain",
                         backgroundPosition: "center",
                         backgroundRepeat: "no-repeat",
-                    }}
-                >
+                    }}>
                     <div className="flex flex-col gap-4 items-start absolute bottom-8">
                         <h1 className="text-[#FAFAFA] text-2xl leading-6 font-semibold tracking-[0.72px] font-[Inter]">
                             PlayStation 5
@@ -79,8 +78,7 @@ const Feature = (props) => {
                                 backgroundSize: "contain",
                                 backgroundPosition: "center",
                                 backgroundRepeat: "no-repeat",
-                            }}
-                        ></div>
+                            }}></div>
                     </div>
                     <div className="grid grid-cols-2 grid-flow-row gap-[30px]">
                         <div className="bg-black py-[31px] px-[30px] relative">
@@ -107,8 +105,7 @@ const Feature = (props) => {
                                     backgroundSize: "cover",
                                     backgroundPosition: "25% 75%",
                                     backgroundRepeat: "no-repeat",
-                                }}
-                            ></div>
+                                }}></div>
                         </div>
                         <div className="bg-black py-[31px] px-[30px] relative">
                             <div className="wm-collection-content flex flex-col gap-4 z-10 absolute left-6 bottom-6">
@@ -134,8 +131,7 @@ const Feature = (props) => {
                                     backgroundSize: "cover",
                                     backgroundPosition: "25% 75%",
                                     backgroundRepeat: "no-repeat",
-                                }}
-                            ></div>
+                                }}></div>
                         </div>
                     </div>
                 </div>
@@ -144,7 +140,7 @@ const Feature = (props) => {
                 <Service />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Feature
+export default Feature;

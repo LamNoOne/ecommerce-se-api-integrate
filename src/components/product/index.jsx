@@ -1,5 +1,5 @@
-import { CardProduct } from "~/components"
-import { Loader } from "~/components"
+import { CardProduct } from "~/components";
+import { Loader } from "~/components";
 const Product = ({ products }) => {
     const content = (
         <div className="grid grid-cols-5 gap-x-[10px] gap-y-[10px]">
@@ -7,9 +7,9 @@ const Product = ({ products }) => {
                 <CardProduct key={product.id} {...product} />
             ))}
         </div>
-    )
+    );
 
-    return <Loader>{content}</Loader>
-}
+    return <Loader>{content}</Loader>;
+};
 
-export default Product
+export default Product;

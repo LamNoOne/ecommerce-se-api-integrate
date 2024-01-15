@@ -1,4 +1,4 @@
-import { apiSlice } from "~/app/api/apiSlice"
+import { apiSlice } from "~/app/api/apiSlice";
 
 export const cartApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -32,20 +32,20 @@ export const cartApiSlice = apiSlice.injectEndpoints({
         }),
         deleteProductFromCart: builder.mutation({
             query: ({ id }) => {
-                const cartId = JSON.parse(localStorage.getItem("user"))?.id
+                const cartId = JSON.parse(localStorage.getItem("user"))?.id;
                 return {
                     url: `/api/carts/delete-product-from-cart?cartId=${cartId}&productId=${id}`,
                     method: "DELETE",
-                }
+                };
             },
             invalidatesTags: ["Cart"],
         }),
     }),
-})
+});
 
 export const {
     useAddCartMutation,
     useGetCartByUserIdQuery,
     useUpdateProductCartQuantityMutation,
-    useDeleteProductFromCartMutation
-} = cartApiSlice
+    useDeleteProductFromCartMutation,
+} = cartApiSlice;

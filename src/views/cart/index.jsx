@@ -1,14 +1,14 @@
-import React from "react"
-import CartProduct from "./components/CartProduct"
-import { Button } from "~/components"
-import { useNavigate } from "react-router-dom"
-import { useGetCartByUserIdQuery } from "~/features/cart/cartApiSlice"
+import React from "react";
+import CartProduct from "./components/CartProduct";
+import { Button } from "~/components";
+import { useNavigate } from "react-router-dom";
+import { useGetCartByUserIdQuery } from "~/features/cart/cartApiSlice";
 
 const Cart = () => {
     // API get cart product, if has cart product => display, if not
     // display no product in cart
     // if click buy, process => navigate to order
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const {
         data: cart,
@@ -16,32 +16,31 @@ const Cart = () => {
         isSuccess,
         isError,
         error,
-    } = useGetCartByUserIdQuery()
+    } = useGetCartByUserIdQuery();
 
-    let content
+    let content;
     if (isLoading) {
-        content = <p>Loading...</p>
+        content = <p>Loading...</p>;
     } else if (isSuccess) {
-        const cartProducts = cart?.metadata?.cart?.products
+        const cartProducts = cart?.metadata?.cart?.products;
         content = (
             <>
                 {cartProducts.map((item, index) => (
                     <CartProduct key={index} {...item} />
                 ))}
             </>
-        )
+        );
     } else if (isError) {
-        content = <p>{error}</p>
+        content = <p>{error}</p>;
     }
-
 
     const handleCreateCart = () => {
         // Cart info => cart ids
         // User info => user id, or user's token to determine user
         // dispatch createOrders action => recieve response => if nice
         // => navigate to checkout to fill necessary information
-        navigate("/user/checkout")
-    }
+        navigate("/user/checkout");
+    };
     return (
         <div className="my-20">
             <div className="flex flex-col gap-10">
@@ -70,13 +69,12 @@ const Cart = () => {
                     primary
                     large
                     type="submit"
-                    onClick={() => handleCreateCart()}
-                >
+                    onClick={() => handleCreateCart()}>
                     Process to checkout
                 </Button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Cart
+export default Cart;

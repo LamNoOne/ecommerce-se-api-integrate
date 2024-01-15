@@ -1,4 +1,4 @@
-import { advertisement } from "./advertisement"
-import { categoryBrowse } from "./categoryBrowse"
+import { advertisement } from "./advertisement";
+import { categoryBrowse } from "./categoryBrowse";
 
-export { advertisement, categoryBrowse }
+export { advertisement, categoryBrowse };

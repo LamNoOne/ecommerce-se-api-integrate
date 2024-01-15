@@ -1,4 +1,3 @@
-
 const OrderIcon = () => {
     return (
         <svg
@@ -6,8 +5,7 @@ const OrderIcon = () => {
             width="20"
             height="22"
             viewBox="0 0 20 22"
-            fill="none"
-        >
+            fill="none">
             <path
                 d="M1 5.3V19.5C1 19.7652 1.10536 20.0196 1.29289 20.2071C1.48043 20.3946 1.73478 20.5 2 20.5H18C18.2652 20.5 18.5196 20.3946 18.7071 20.2071C18.8946 20.0196 19 19.7652 19 19.5V5.3H1Z"
                 stroke="#FAFAFA"
@@ -22,7 +20,7 @@ const OrderIcon = () => {
                 strokeLinejoin="round"
             />
         </svg>
-    )
-}
+    );
+};
 
-export default OrderIcon
+export default OrderIcon;

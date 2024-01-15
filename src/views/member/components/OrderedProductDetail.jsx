@@ -1,10 +1,10 @@
-import React from "react"
-import { useNavigate } from "react-router-dom"
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const OrderedProductDetail = (props) => {
-    const navigate = useNavigate()
-    const { quantity, price, product } = props
-    const { id, name, imageUrl } = product
+    const navigate = useNavigate();
+    const { quantity, price, product } = props;
+    const { id, name, imageUrl } = product;
 
     return (
         <div className="border rounded-lg shadow-md px-4 pt-4 pb-2">
@@ -15,8 +15,7 @@ const OrderedProductDetail = (props) => {
                 <div className="order-short-info flex flex-col gap-2 items-start ps-4 w-full">
                     <h2
                         onClick={() => navigate(`/product/${id}`)}
-                        className="name-product-order hover:text-[#ff0000] cursor-pointer"
-                    >
+                        className="name-product-order hover:text-[#ff0000] cursor-pointer">
                         {name}
                     </h2>
                     <div className="quantity-container flex flex-row justify-between w-full">
@@ -40,19 +39,17 @@ const OrderedProductDetail = (props) => {
             <div className="flex justify-end gap-4">
                 <button
                     onClick={() => navigate(`/product/${id}`)}
-                    className="flex items-center justify-center rounded text-sm px-2 py-1 border border-[#ff0000] text-[#ff0000]"
-                >
+                    className="flex items-center justify-center rounded text-sm px-2 py-1 border border-[#ff0000] text-[#ff0000]">
                     Rate
                 </button>
                 <button
                     onClick={() => navigate(`/product/${id}`)}
-                    className="flex items-center justify-center rounded text-sm px-2 py-1 border border-[#ff0000] text-[#ff0000]"
-                >
+                    className="flex items-center justify-center rounded text-sm px-2 py-1 border border-[#ff0000] text-[#ff0000]">
                     Repurchase
                 </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default OrderedProductDetail
+export default OrderedProductDetail;

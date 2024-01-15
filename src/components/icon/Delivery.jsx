@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const Delivery = () => {
     return (
@@ -7,8 +7,7 @@ const Delivery = () => {
             width="40"
             height="40"
             viewBox="0 0 40 40"
-            fill="none"
-        >
+            fill="none">
             <g clip-path="url(#clip0_261_4843)">
                 <path
                     d="M11.6673 31.6667C13.5083 31.6667 15.0007 30.1743 15.0007 28.3333C15.0007 26.4924 13.5083 25 11.6673 25C9.82637 25 8.33398 26.4924 8.33398 28.3333C8.33398 30.1743 9.82637 31.6667 11.6673 31.6667Z"
@@ -66,7 +65,7 @@ const Delivery = () => {
                 </clipPath>
             </defs>
         </svg>
-    )
-}
+    );
+};
 
-export default Delivery
+export default Delivery;

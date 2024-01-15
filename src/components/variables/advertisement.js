@@ -26,5 +26,5 @@ export const advertisement = [
         image: "https://res.cloudinary.com/dmnzkqysq/image/upload/v1696601695/feoxzlk6obmqaajr1sow.jpg",
         title: "iPhone 14 Series",
         event: "Up to 10% off Voucher",
-    }
-]
+    },
+];

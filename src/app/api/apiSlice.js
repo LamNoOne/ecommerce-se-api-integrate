@@ -1,39 +1,46 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { logOut } from '../../features/auth/authSlice'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { logOut } from "../../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'http://localhost:3055',
-    credentials: 'include',
+    baseUrl: "http://localhost:3055",
+    credentials: "include",
     prepareHeaders: (headers) => {
-        headers.set("x-api-version", 1)
-        if(localStorage.getItem('user')) {
-            headers.set('x-user-id', JSON.parse(localStorage.getItem('user'))?.id)
+        headers.set("x-api-version", 1);
+        if (localStorage.getItem("user")) {
+            headers.set(
+                "x-user-id",
+                JSON.parse(localStorage.getItem("user"))?.id
+            );
         }
-        return headers
-    }
-})
+        return headers;
+    },
+});
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
-    let result = await baseQuery(args, api, extraOptions)
+    let result = await baseQuery(args, api, extraOptions);
 
     if (result?.error?.status === 401) {
-        // send refresh token to get new access token 
-        const refreshResult = await baseQuery('/api/auth/refresh-token', api, extraOptions)
+        // send refresh token to get new access token
+        const refreshResult = await baseQuery(
+            "/api/auth/refresh-token",
+            api,
+            extraOptions
+        );
         if (refreshResult?.data) {
-            // store the new token 
+            // store the new token
             // api.dispatch(setCredentials({ ...refreshResult.data }))
-            // retry the original query with new access token 
-            result = await baseQuery(args, api, extraOptions)
+            // retry the original query with new access token
+            result = await baseQuery(args, api, extraOptions);
         } else {
-            api.dispatch(logOut())
+            api.dispatch(logOut());
         }
     }
 
-    return result
-}
+    return result;
+};
 
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
-    tagTypes: ['Cart', 'Order', 'Wishlist'],
-    endpoints: builder => ({})
-})
+    tagTypes: ["Cart", "Order", "Wishlist"],
+    endpoints: (builder) => ({}),
+});

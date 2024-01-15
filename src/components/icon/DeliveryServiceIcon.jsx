@@ -1,4 +1,3 @@
-
 const DeliveryServiceIcon = () => {
     return (
         <svg
@@ -6,8 +5,7 @@ const DeliveryServiceIcon = () => {
             width="41"
             height="40"
             viewBox="0 0 41 40"
-            fill="none"
-        >
+            fill="none">
             <g clipPath="url(#clip0_803_335)">
                 <path
                     d="M12.1667 31.6667C14.0076 31.6667 15.5 30.1743 15.5 28.3333C15.5 26.4924 14.0076 25 12.1667 25C10.3257 25 8.83334 26.4924 8.83334 28.3333C8.83334 30.1743 10.3257 31.6667 12.1667 31.6667Z"
@@ -70,7 +68,7 @@ const DeliveryServiceIcon = () => {
                 </clipPath>
             </defs>
         </svg>
-    )
-}
+    );
+};
 
-export default DeliveryServiceIcon
+export default DeliveryServiceIcon;

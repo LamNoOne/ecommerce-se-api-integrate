@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 
 const Return = () => {
     return (
@@ -7,8 +7,7 @@ const Return = () => {
             width="40"
             height="40"
             viewBox="0 0 40 40"
-            fill="none"
-        >
+            fill="none">
             <g clip-path="url(#clip0_261_4865)">
                 <path
                     d="M33.3327 18.3334C32.9251 15.4004 31.5645 12.6828 29.4604 10.5992C27.3564 8.51557 24.6256 7.18155 21.6888 6.80261C18.752 6.42366 15.7721 7.02082 13.208 8.5021C10.644 9.98337 8.6381 12.2666 7.49935 15M6.66602 8.33335V15H13.3327"
@@ -31,7 +30,7 @@ const Return = () => {
                 </clipPath>
             </defs>
         </svg>
-    )
-}
+    );
+};
 
-export default Return
+export default Return;

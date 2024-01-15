@@ -1,14 +1,18 @@
-import React from "react"
-import images from "~/assets/images"
-import { BsTelephone } from "react-icons/bs"
-import { CiLocationOn } from "react-icons/ci"
+import React from "react";
+import images from "~/assets/images";
+import { BsTelephone } from "react-icons/bs";
+import { CiLocationOn } from "react-icons/ci";
 
 const SupportInfo = () => {
     return (
         <div className="payment-box-container shadow-md border rounded-lg px-4 py-5">
             <div className="payment-header flex items-center justify-start gap-4 mb-4">
                 <div className="w-[35px] h-[35px]">
-                    <img src={images.presentor} className="object-contain" alt="support" />
+                    <img
+                        src={images.presentor}
+                        className="object-contain"
+                        alt="support"
+                    />
                 </div>
                 <h3 className="text-lg font-medium">Support Information</h3>
             </div>
@@ -21,8 +25,7 @@ const SupportInfo = () => {
                         </p>
                         <a
                             href="tel:02871000472"
-                            className="support-phone text-base text-[#ff0000]"
-                        >
+                            className="support-phone text-base text-[#ff0000]">
                             (028) 7100 0472
                         </a>
                     </div>
@@ -40,7 +43,7 @@ const SupportInfo = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default SupportInfo
+export default SupportInfo;

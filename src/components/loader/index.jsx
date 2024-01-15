@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react"
-import ClipLoader from "react-spinners/ClipLoader"
+import { useState, useEffect } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const Loader = ({ children }) => {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
         setTimeout(() => {
-            setLoading(false)
-        }, 700)
-    }, [])
+            setLoading(false);
+        }, 700);
+    }, []);
 
     const loader = (
         <div className="min-h-[200px] flex justify-center items-center">
@@ -21,8 +21,8 @@ const Loader = ({ children }) => {
                 data-testid="loader"
             />
         </div>
-    )
-    return <>{loading ? loader : children}</>
-}
+    );
+    return <>{loading ? loader : children}</>;
+};
 
-export default Loader
+export default Loader;

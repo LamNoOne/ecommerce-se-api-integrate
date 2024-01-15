@@ -1,50 +1,48 @@
-import React, { useState } from "react"
-import ReactStars from "react-stars"
-import { FiHeart } from "react-icons/fi"
-import { useNavigate } from "react-router-dom"
-import formatCurrency from "~/config/CustomCost"
-import { Discount } from "../icon"
-import { useSelector } from "react-redux"
-import { selectCurrentUser } from "~/features/auth/authSlice"
+import React, { useState } from "react";
+import ReactStars from "react-stars";
+import { FiHeart } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import formatCurrency from "~/config/CustomCost";
+import { Discount } from "../icon";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "~/features/auth/authSlice";
 import {
     useAddProductToWishlistMutation,
     useDeleteProductFromWishlistMutation,
-} from "~/features/wishlist/wishlistApiSlice"
+} from "~/features/wishlist/wishlistApiSlice";
 
 const CardProduct = (props) => {
-    const { id, name, price, stockQuantity, imageUrl } = props
-    const userState = useSelector(selectCurrentUser)
-    const [addProductToWishlist] =
-        useAddProductToWishlistMutation()
-    const [deleteProductFromWishlist] = useDeleteProductFromWishlistMutation()
-    const [click, setClick] = useState(false)
-    const navigate = useNavigate()
-    const oldPrice = price + 9999
-    const percent = Math.floor(100 * (1 - price / oldPrice))
-    const isWishList = stockQuantity === undefined
+    const { id, name, price, stockQuantity, imageUrl } = props;
+    const userState = useSelector(selectCurrentUser);
+    const [addProductToWishlist] = useAddProductToWishlistMutation();
+    const [deleteProductFromWishlist] = useDeleteProductFromWishlistMutation();
+    const [click, setClick] = useState(false);
+    const navigate = useNavigate();
+    const oldPrice = price + 9999;
+    const percent = Math.floor(100 * (1 - price / oldPrice));
+    const isWishList = stockQuantity === undefined;
     const handleClick = async () => {
-        setClick(!click)
+        setClick(!click);
         if (!click && userState) {
             try {
-                await addProductToWishlist({ id })
+                await addProductToWishlist({ id });
             } catch (error) {
-                console.error(error)
+                console.error(error);
             }
         } else {
             try {
-                await deleteProductFromWishlist({ id })
+                await deleteProductFromWishlist({ id });
             } catch (error) {
-                console.error(error)
+                console.error(error);
             }
         }
-    }
+    };
 
     return (
         <section className="product-item p-[10px] cursor-pointer flex flex-col relative border-[2px] border-[#F5F5F5] rounded-lg shadow-sm">
             <div
                 onClick={() => navigate(`/product/${id}`)}
-                className="product-img-container mt-[10px]"
-            >
+                className="product-img-container mt-[10px]">
                 <div className="w-[100px] h-[28px] object-contain absolute top-0 -left-1">
                     <Discount />
                     <p className="text-xs text-white font-medium absolute top-2 left-2">{`Discount ${percent}%`}</p>
@@ -101,7 +99,7 @@ const CardProduct = (props) => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default CardProduct
+export default CardProduct;

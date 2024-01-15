@@ -1,10 +1,10 @@
-import { apiSlice } from "~/app/api/apiSlice"
+import { apiSlice } from "~/app/api/apiSlice";
 
 export const wishlistApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getWishlist: builder.query({
             query: () => "/api/wishlist/get-my-wishlist",
-            providesTags: ['Wishlist']
+            providesTags: ["Wishlist"],
         }),
         addProductToWishlist: builder.mutation({
             query: ({ id }) => ({
@@ -14,16 +14,20 @@ export const wishlistApiSlice = apiSlice.injectEndpoints({
                     productId: id,
                 },
             }),
-            invalidatesTags: ['Wishlist']
+            invalidatesTags: ["Wishlist"],
         }),
         deleteProductFromWishlist: builder.mutation({
             query: ({ id }) => ({
                 url: `/api/wishlist/delete-product?productId=${id}`,
                 method: "DELETE",
             }),
-            invalidatesTags: ['Wishlist']
-        })
+            invalidatesTags: ["Wishlist"],
+        }),
     }),
-})
+});
 
-export const { useGetWishlistQuery, useAddProductToWishlistMutation, useDeleteProductFromWishlistMutation } = wishlistApiSlice
+export const {
+    useGetWishlistQuery,
+    useAddProductToWishlistMutation,
+    useDeleteProductFromWishlistMutation,
+} = wishlistApiSlice;

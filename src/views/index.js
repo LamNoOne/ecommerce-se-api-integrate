@@ -1,13 +1,13 @@
-import Home from "./home"
-import Login from "./login"
-import Signup from "./signup"
-import WishList from "./wishlist"
-import Cart from "./cart"
-import SingleProduct from "./singleProduct"
-import CheckOut from "./checkout"
-import Product from "./product"
-import AllProducts from "./allProduct"
-import ProductSearch from "./productSearch"
+import Home from "./home";
+import Login from "./login";
+import Signup from "./signup";
+import WishList from "./wishlist";
+import Cart from "./cart";
+import SingleProduct from "./singleProduct";
+import CheckOut from "./checkout";
+import Product from "./product";
+import AllProducts from "./allProduct";
+import ProductSearch from "./productSearch";
 import {
     HomeMember,
     Order,
@@ -18,7 +18,7 @@ import {
     Account,
     Support,
     Feedback,
-} from "./member"
+} from "./member";
 
 export {
     Home,
@@ -39,5 +39,5 @@ export {
     Account,
     Support,
     Feedback,
-    ProductSearch
-}
+    ProductSearch,
+};

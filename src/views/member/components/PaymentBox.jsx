@@ -1,7 +1,7 @@
-import React from "react"
-import { Line } from "~/components"
-import { PaymentIcon } from "~/components/icon"
-import style from "~/style"
+import React from "react";
+import { Line } from "~/components";
+import { PaymentIcon } from "~/components/icon";
+import style from "~/style";
 
 const PaymentBox = ({ total, orderStatus, orderPaymentForm }) => {
     return (
@@ -27,9 +27,7 @@ const PaymentBox = ({ total, orderStatus, orderPaymentForm }) => {
                 </div>
                 <Line style={style.lineStyleCart} />
                 <div className="flex items-center justify-between payment-required">
-                    <h5 className="text-sm text-[#717171]">
-                        Payment form:
-                    </h5>
+                    <h5 className="text-sm text-[#717171]">Payment form:</h5>
                     <span className="text-sm text-[#4a4a4a] font-semibold">
                         {orderPaymentForm}
                     </span>
@@ -50,7 +48,7 @@ const PaymentBox = ({ total, orderStatus, orderPaymentForm }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default PaymentBox
+export default PaymentBox;

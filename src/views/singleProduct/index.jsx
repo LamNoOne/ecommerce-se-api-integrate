@@ -1,26 +1,26 @@
-import React from "react"
-import ProductSlide from "./components/ProductSlide"
-import ProductInfo from "./components/ProductInfo"
-import { useParams } from "react-router-dom"
-import { useGetProductByIdQuery } from "~/features/products/productApiSlice"
-import { Technical } from "~/components"
-import RelatedSlide from "./components/RelatedSlide"
+import React from "react";
+import ProductSlide from "./components/ProductSlide";
+import ProductInfo from "./components/ProductInfo";
+import { useParams } from "react-router-dom";
+import { useGetProductByIdQuery } from "~/features/products/productApiSlice";
+import { Technical } from "~/components";
+import RelatedSlide from "./components/RelatedSlide";
 
 const SingleProduct = () => {
-    const { id: productId } = useParams()
+    const { id: productId } = useParams();
     const {
         data: product,
         isLoading,
         isSuccess,
         isError,
         error,
-    } = useGetProductByIdQuery(productId)
+    } = useGetProductByIdQuery(productId);
 
-    let content
+    let content;
     if (isLoading) {
-        content = <p>Loading...</p>
+        content = <p>Loading...</p>;
     } else if (isSuccess) {
-        const productInfo = product?.metadata?.product
+        const productInfo = product?.metadata?.product;
         content = (
             <section className="my-8 flex flex-col">
                 <div className="flex w-full gap-10 flex-1">
@@ -44,12 +44,12 @@ const SingleProduct = () => {
                     </div>
                 </div>
             </section>
-        )
+        );
     } else if (isError) {
-        content = <p>{error}</p>
+        content = <p>{error}</p>;
     }
 
-    return <>{content}</>
-}
+    return <>{content}</>;
+};
 
-export default SingleProduct
+export default SingleProduct;
