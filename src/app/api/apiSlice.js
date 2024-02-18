@@ -1,8 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut } from "../../features/auth/authSlice";
+import { resetWishList } from "~/features/wishlist/wishlistSlice";
+import { baseUrl } from "../../config/BaseUrl";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: "http://localhost:3055",
+    baseUrl,
     credentials: "include",
     prepareHeaders: (headers) => {
         headers.set("x-api-version", 1);
@@ -19,22 +21,24 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
 
-    if (result?.error?.status === 401) {
-        // send refresh token to get new access token
-        const refreshResult = await baseQuery(
-            "/api/auth/refresh-token",
-            api,
-            extraOptions
-        );
-        if (refreshResult?.data) {
-            // store the new token
-            // api.dispatch(setCredentials({ ...refreshResult.data }))
-            // retry the original query with new access token
-            result = await baseQuery(args, api, extraOptions);
-        } else {
-            api.dispatch(logOut());
-        }
-    }
+    // if (result?.error?.status === 401) {
+    //     console.log('sending refresh token')
+    //     // send refresh token to get new access token
+    //     const refreshResult = await baseQuery(
+    //         "/api/auth/refresh-token",
+    //         api,
+    //         extraOptions
+    //     );
+    //     if (refreshResult?.data) {
+    //         // store the new token
+    //         // api.dispatch(setCredentials({ ...refreshResult.data }))
+    //         // retry the original query with new access token
+    //         result = await baseQuery(args, api, extraOptions);
+    //     } else {
+    //         api.dispatch(logOut());
+    //         api.dispatch(resetWishList());
+    //     }
+    // }
 
     return result;
 };
