@@ -23,11 +23,9 @@ export default defineConfig(() => {
         build: {
             outDir: "build",
         },
-        plugins: [
-            react(),
-            svgr({ svgrOptions: { icon: true } }),
-            vitePluginRequire.default(),
-            eslint(),
-        ],
+        preview: {
+            port: 3000,
+        },
+        plugins: [react(), svgr({ svgrOptions: { icon: true } }), vitePluginRequire.default(), eslint()],
     };
 });
