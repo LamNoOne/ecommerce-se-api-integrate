@@ -27,6 +27,6 @@ export default defineConfig(() => {
             port: 3000,
         },
         plugins: [react(), svgr({ svgrOptions: { icon: true } }), vitePluginRequire.default(), eslint()],
-        base: "/"
+        base: "/ecommerce-se-api-integrate/"
     };
 });
