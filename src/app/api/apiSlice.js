@@ -5,6 +5,7 @@ import { baseUrl } from "../../config/BaseUrl";
 
 const baseQuery = fetchBaseQuery({
     baseUrl,
+    withCredentials: true,
     credentials: "include",
     prepareHeaders: (headers) => {
         headers.set("x-api-version", 1);
