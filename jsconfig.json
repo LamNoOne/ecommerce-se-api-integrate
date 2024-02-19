@@ -1,9 +1,15 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "~/*": ["./src/*"],
-      }
-    }
-  }
-  
+        "lib": ["es2020", "DOM"],
+        "moduleResolution": "node",
+        "target": "es2020",
+        "checkJs": true,
+        "jsx": "react-jsx",
+        "baseUrl": "./src",
+        "paths": {
+            "~/*": ["/src/*"]
+        },
+    },
+    "include": ["src/**/*.js", "src/**/*.jsx", "cypress/**/*.js"],
+    "exclude": ["node_modules"]
+}
