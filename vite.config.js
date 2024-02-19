@@ -27,6 +27,6 @@ export default defineConfig(() => {
             port: 3000,
         },
         plugins: [react(), svgr({ svgrOptions: { icon: true } }), vitePluginRequire.default(), eslint()],
-        base: "/vite-deploy/"
+        base: "/"
     };
 });
