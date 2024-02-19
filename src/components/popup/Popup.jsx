@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useLogoutMutation } from "~/features/auth/authApiSlice";
 import { useDispatch } from "react-redux";
 import { logOut } from "~/features/auth/authSlice";
-import { resetWishList } from "~/features/wishlist/wishlistSlice";
 
 export default function PopupComponent({ children }) {
     const [logout, { isLoading }] = useLogoutMutation();
@@ -16,13 +15,12 @@ export default function PopupComponent({ children }) {
                 localStorage.removeItem("user");
                 localStorage.removeItem("persist:root");
                 dispatch(logOut());
-                dispatch(resetWishList());
                 await logout();
                 navigate("/login");
             } catch (error) {
                 console.error(error);
             } finally {
-                window.location.reload(true);
+                window.location.reload();
             }
         }
     };

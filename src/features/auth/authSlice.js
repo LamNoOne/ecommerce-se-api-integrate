@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { store } from "~/app/store";
 
 const authSlice = createSlice({
     name: "auth",
@@ -8,7 +9,7 @@ const authSlice = createSlice({
             state.user = action.payload;
         },
         logOut: (state, action) => {
-            state.user = null;
+            store.dispatch({ type: 'USER_LOGOUT' });
         },
     },
 });

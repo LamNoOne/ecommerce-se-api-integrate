@@ -3,11 +3,11 @@
         "lib": ["es2020", "DOM"],
         "moduleResolution": "node",
         "target": "es2020",
-        "checkJs": true,
+        "checkJs": false,
         "jsx": "react-jsx",
-        "baseUrl": "./src",
+        "baseUrl": ".",
         "paths": {
-            "~/*": ["/src/*"]
+            "~/*": ["./src/*"]
         },
     },
     "include": ["src/**/*.js", "src/**/*.jsx", "cypress/**/*.js"],
