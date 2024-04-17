@@ -20,7 +20,7 @@ export default defineConfig(() => {
             },
         },
         build: {
-            outDir: "build",
+            outDir: "dist",
         },
         preview: {
             port: 3000,
