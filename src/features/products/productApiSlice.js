@@ -7,18 +7,18 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 let queryString;
                 const { page = 1, order, limit = 100 } = params;
                 if (!order) {
-                    queryString = `/api/products?_page=${page}&_limit=${limit}`;
+                    queryString = `/products?_page=${page}&_limit=${limit}`;
                 } else {
-                    queryString = `/api/products?_page=${page}&_limit=${limit}&_order=${order}&_sortBy=price`;
+                    queryString = `/products?_page=${page}&_limit=${limit}&_order=${order}&_sortBy=price`;
                 }
                 return queryString;
             },
         }),
         getProductById: builder.query({
-            query: (id) => `/api/products/get-product?id=${id}`,
+            query: (id) => `/products/get-product?id=${id}`,
         }),
         getLimitProduct: builder.query({
-            query: (limit = 10) => `/api/products?_limit=${limit}`,
+            query: (limit = 10) => `/products?_limit=${limit}`,
         }),
         searchProduct: builder.query({
             query: (params) => {
@@ -31,9 +31,9 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 } = params;
                 let queryString;
                 if (!order && name) {
-                    queryString = `/api/products?name=${name}&_page=${page}&_limit=${limit}`;
+                    queryString = `/products?name=${name}&_page=${page}&_limit=${limit}`;
                 } else if (order && name) {
-                    queryString = `/api/products?name=${name}&_page=${page}&_limit=${limit}&_order=${order}&_sortBy=${sortBy}`;
+                    queryString = `/products?name=${name}&_page=${page}&_limit=${limit}&_order=${order}&_sortBy=${sortBy}`;
                 }
                 return queryString;
             },

@@ -5,7 +5,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         getUser: builder.query({
             query: () => {
                 return {
-                    url: "/api/users/get-info",
+                    url: "/users/get-info",
                 };
             },
         }),
@@ -20,7 +20,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
                 bodyFormData.append("lastName", lastName);
                 bodyFormData.append("address", address);
                 return {
-                    url: "/api/users/update-profile",
+                    url: "/users/update-profile",
                     method: "PATCH",
                     body: bodyFormData,
                 };

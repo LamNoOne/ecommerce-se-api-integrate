@@ -3,11 +3,11 @@ import { apiSlice } from "../../app/api/apiSlice";
 export const orderApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getAllOrder: builder.query({
-            query: () => "/api/checkout/get-all-orders",
+            query: () => "/checkout/get-all-orders",
             providesTags: ["Order", "Cart"],
         }),
         getOrderById: builder.query({
-            query: (id) => `/api/checkout/get-order?orderId=${id}`,
+            query: (id) => `/checkout/get-order?orderId=${id}`,
         }),
         createOrderFromCart: builder.mutation({
             query: (params) => {
@@ -15,7 +15,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
                 const { shipAddress, phoneNumber, paymentFormId, order } =
                     params;
                 return {
-                    url: "/api/checkout/order-from-cart",
+                    url: "/checkout/order-from-cart",
                     method: "POST",
                     body: {
                         cartId,
@@ -33,7 +33,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
                 const { shipAddress, phoneNumber, paymentFormId, order } =
                     params;
                 return {
-                    url: "/api/checkout/order",
+                    url: "/checkout/order",
                     method: "POST",
                     body: {
                         shipAddress,
