@@ -11,7 +11,7 @@ const Login = () => {
                 <div className="me-[135px] min-w-[371px]">
                     <div class="demo text-start">
                         <h4 className="text-black text-opacity-50">Demo:</h4>
-                        <p className="text-black text-opacity-50">- username: clientclient</p>
+                        <p className="text-black text-opacity-50">- username: trannguyendaclam</p>
                         <p className="text-black text-opacity-50">- password: 123456</p>
                     </div>
                     <LoginForm />
