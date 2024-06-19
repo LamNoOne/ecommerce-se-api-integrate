@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
     withCredentials: true,
     baseUrl,
     headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
-    credentials: "include",
+    credentials: 'include',
     prepareHeaders: (headers) => {
         headers.set("x-api-version", '1');
         if (localStorage.getItem("user")) {
