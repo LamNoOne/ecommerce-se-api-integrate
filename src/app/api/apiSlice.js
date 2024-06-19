@@ -4,7 +4,9 @@ import { resetWishList } from "~/features/wishlist/wishlistSlice";
 import { baseUrl } from "../../config/BaseUrl";
 
 const baseQuery = fetchBaseQuery({
+    withCredentials: true,
     baseUrl,
+    headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
     credentials: "include",
     prepareHeaders: (headers) => {
         headers.set("x-api-version", '1');
